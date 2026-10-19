@@ -33,32 +33,6 @@ const timelineItems: TimelineItem[] = [
     barClassName:
       "border-[#6d28d9] bg-[#6d28d9] text-white hover:border-[#7c3aed] hover:bg-[#7c3aed]",
   },
-  {
-    label: "Razorpay AI Buildathon",
-    shortLabel: "Buildathon",
-    dates: "2026",
-    detail: "Builder, Track 05 (Open)",
-    experienceIndex: 1,
-    start: 59,
-    end: 100,
-    align: "end",
-    icon: "https://github.com/webdevamey.png",
-    barClassName:
-      "border-[#0369a1] bg-[#0369a1] text-white hover:border-[#0284c7] hover:bg-[#0284c7]",
-  },
-  {
-    label: "Independent Projects",
-    shortLabel: "Projects",
-    dates: "2025 – Present",
-    detail: "Full-Stack Web Developer",
-    experienceIndex: 2,
-    start: 5,
-    end: 100,
-    align: "start",
-    icon: "https://github.com/webdevamey.png",
-    barClassName:
-      "border-[#047857] bg-[#047857] text-white hover:border-[#059669] hover:bg-[#059669]",
-  },
 ];
 
 type ExperienceTimelineProps = {

@@ -83,8 +83,7 @@ export const projectsData: Project[] = [
     description: "70 text effects for React, installed as source with the shadcn CLI. Every effect has a live preview and a calm preset, and the catalog is readable by AI tools through llms.txt and an MCP server.",
     tech: ["next", "react", "ts", "motion"],
     github: "https://github.com/WebDevAmey/textdesigns",
-    // TODO(Amey): textdesigns.vercel.app returned DEPLOYMENT_NOT_FOUND on 2026-10-19; add the live URL once it is deployed.
-    live: "",
+    live: "https://typeforge-ten.vercel.app",
     hasPin: true,
   },
   {
@@ -97,8 +96,7 @@ export const projectsData: Project[] = [
     description: "Flight Deck, a browser-based mission planner for ArduPilot. Draw an area on the map and get a validated, ground-station-ready mission: survey grids, route optimisation, no-fly zones, terrain checks, and exports for Mission Planner and QGroundControl.",
     tech: ["next", "react", "ts", "prisma", "langgraph", { label: "MapLibre" }],
     github: "https://github.com/WebDevAmey/mission-planner",
-    // TODO(Amey): mission-planner.vercel.app serves a different app (a river-erosion risk map) as of 2026-10-19; add the Flight Deck URL once it is deployed.
-    live: "",
+    live: "https://mission-planner-eight.vercel.app",
     hasPin: true,
   },
   {
