@@ -205,7 +205,7 @@ export function GithubGraph() {
       <div className="relative py-2">
         <div className="flex items-center justify-between gap-3">
           <h2 id="github-activity-title" className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
-            GitHub Activity
+            <span aria-hidden="true" className="mr-2 align-[1px] font-mono text-[11px] font-normal tracking-normal text-zinc-400 dark:text-zinc-500">03</span>GitHub Activity
           </h2>
           <p className="text-right text-[11px] text-zinc-500 dark:text-zinc-400" aria-live="polite">
             {graphStatus}

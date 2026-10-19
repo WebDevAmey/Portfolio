@@ -90,7 +90,7 @@ export default function AllExperiencePage() {
       </div>
 
       {/* Content Section */}
-      <div
+      <div id="main-content" tabIndex={-1}
         className="pointer-events-none ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(var(--experience-hero)+112px)] pb-16 px-4 flex flex-col z-10 relative"
       >
         <div className="pointer-events-auto relative pt-0 pb-6">
@@ -98,7 +98,8 @@ export default function AllExperiencePage() {
           {/* Experience Items */}
           <div className="flex flex-col relative z-10 w-full">
             {experiences.map((item, idx) => {
-              const isOpen = openIdx === idx;
+              const hasDetails = Boolean(item.description.trim() || item.metrics?.length || item.tech.length);
+              const isOpen = hasDetails && openIdx === idx;
               const isLast = idx === experiences.length - 1;
 
               return (
@@ -123,8 +124,18 @@ export default function AllExperiencePage() {
                   )}
 
                   <div
-                    className="flex flex-col items-start gap-2.5 py-3.5 px-4 -mx-4 hover:bg-zinc-50 dark:hover:bg-zinc-900/20 transition-colors cursor-pointer relative z-20 rounded-lg sm:gap-3 sm:py-4 2xl:flex-row 2xl:items-center 2xl:justify-between"
-                    onClick={() => setOpenIdx(isOpen ? null : idx)}
+                    className={`flex flex-col items-start gap-2.5 py-3.5 px-4 -mx-4 hover:bg-zinc-50 dark:hover:bg-zinc-900/20 transition-colors ${hasDetails ? "cursor-pointer" : "cursor-default"} relative z-20 rounded-lg sm:gap-3 sm:py-4 2xl:flex-row 2xl:items-center 2xl:justify-between outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/30 dark:focus-visible:ring-white/30`}
+                    role={hasDetails ? "button" : undefined}
+                    tabIndex={hasDetails ? 0 : undefined}
+                    aria-expanded={hasDetails ? isOpen : undefined}
+                    aria-controls={hasDetails ? `experience-details-${idx}` : undefined}
+                    onClick={() => hasDetails && setOpenIdx(isOpen ? null : idx)}
+                    onKeyDown={(e) => {
+                      if (hasDetails && (e.key === "Enter" || e.key === " ")) {
+                        e.preventDefault();
+                        setOpenIdx(isOpen ? null : idx);
+                      }
+                    }}
                   >
                     <div className="flex min-w-0 flex-1 items-start gap-3 sm:gap-4">
                       <div className="size-10 shrink-0 rounded-[10px] border border-black/10 bg-zinc-50 p-[2px] shadow-sm shadow-black/15 dark:border-zinc-800 dark:bg-[#111111] dark:shadow-md dark:shadow-black/50">
@@ -164,7 +175,8 @@ export default function AllExperiencePage() {
                         <span>{item.dates}</span>
                         <svg
                           viewBox="0 0 24 24"
-                          className={`w-3.5 h-3.5 text-zinc-500 absolute -right-5 top-1/2 -translate-y-1/2 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                          aria-hidden="true"
+                    className={`w-3.5 h-3.5 text-zinc-500 absolute -right-5 top-1/2 -translate-y-1/2 transition-transform duration-300 ${hasDetails ? "" : "hidden"} ${isOpen ? "rotate-180" : ""
                             }`}
                           fill="none"
                           stroke="currentColor"
@@ -181,6 +193,8 @@ export default function AllExperiencePage() {
 
                   {/* Expandable Details Section */}
                   <div
+                id={`experience-details-${idx}`}
+                aria-hidden={!isOpen}
                     className={`-mx-4 grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}
                   >
@@ -301,7 +315,7 @@ export default function AllExperiencePage() {
                             })}
                         </ul>
 
-                        {item.tech && (
+                        {item.tech.length > 0 && (
                           <div className="flex flex-wrap gap-2 mt-4">
                             {item.tech.map((tech) => (
                               <span

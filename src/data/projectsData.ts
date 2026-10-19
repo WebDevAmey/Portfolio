@@ -48,6 +48,8 @@ export interface Project {
   github: string;
   live: string;
   starsText?: string;
+  /** Shown under the description when the project is someone else's original work. */
+  credit?: string;
   backgroundImage?: string;
   hasPin: boolean;
 }
@@ -72,10 +74,51 @@ export const techNames: Record<TechKey, string> = {
 
 export const projectsData: Project[] = [
   {
+    slug: "textlab",
+    title: "Textlab",
+    imageTitle: "Homepage",
+    src: "/project-image/textlab.webp",
+    lightModeSrc: "/project-image/textlab-light.webp",
+    video: "",
+    description: "70 text effects for React, installed as source with the shadcn CLI. Every effect has a live preview and a calm preset, and the catalog is readable by AI tools through llms.txt and an MCP server.",
+    tech: ["next", "react", "ts", "motion"],
+    github: "https://github.com/WebDevAmey/textdesigns",
+    // TODO(Amey): textdesigns.vercel.app returned DEPLOYMENT_NOT_FOUND on 2026-10-19; add the live URL once it is deployed.
+    live: "",
+    hasPin: true,
+  },
+  {
+    slug: "mission-planner",
+    title: "Mission Planner",
+    imageTitle: "Landing page",
+    src: "/project-image/flight-deck.webp",
+    lightModeSrc: "/project-image/flight-deck-light.webp",
+    video: "",
+    description: "Flight Deck, a browser-based mission planner for ArduPilot. Draw an area on the map and get a validated, ground-station-ready mission: survey grids, route optimisation, no-fly zones, terrain checks, and exports for Mission Planner and QGroundControl.",
+    tech: ["next", "react", "ts", "prisma", "langgraph", { label: "MapLibre" }],
+    github: "https://github.com/WebDevAmey/mission-planner",
+    // TODO(Amey): mission-planner.vercel.app serves a different app (a river-erosion risk map) as of 2026-10-19; add the Flight Deck URL once it is deployed.
+    live: "",
+    hasPin: true,
+  },
+  {
+    slug: "system-design-mafia",
+    title: "System Design Mafia",
+    imageTitle: "Twitter architecture diagram",
+    src: "/project-image/system-design-mafia.webp",
+    video: "",
+    description: "Free, open-source system design guides built around interactive architecture diagrams. Drag, zoom, and trace each edge through real designs like Twitter, WhatsApp, and YouTube, with a written breakdown of every trade-off.",
+    tech: ["next", "react", "ts", "tailwind", { label: "React Flow" }],
+    github: "https://github.com/WebDevAmey/system-design-mafia",
+    live: "https://sdmafia.hdtl.in",
+    credit: "Original project by Atharva Arbat",
+    hasPin: true,
+  },
+  {
     slug: "researchgraph",
     title: "ResearchGraph",
     imageTitle: "Home",
-    src: "/project-image/researchgraph.png",
+    src: "/project-image/researchgraph.webp",
     video: "",
     description: "An autonomous research agent that plans an investigation, researches topics in parallel, scores every source, verifies its quotes, and writes a report where every sentence links back to its evidence.",
     tech: ["langgraph", "langchain", "claude", "python", "fastapi", "next", "tailwind"],
@@ -144,22 +187,10 @@ export const projectsData: Project[] = [
     hasPin: false,
   },
   {
-    slug: "mission-planner",
-    title: "Mission Planner",
-    imageTitle: "Cover",
-    src: "/project-image/mission-planner.webp",
-    video: "",
-    description: "A web-based mission planner for ArduPilot vehicles with drag-and-drop waypoints, geofencing, route optimization, risk scoring, and multi-format mission export.",
-    tech: ["next", "react", "ts", "langgraph", "tailwind", { label: "MapLibre" }],
-    github: "https://github.com/WebDevAmey/mission-planner",
-    live: "",
-    hasPin: false,
-  },
-  {
     slug: "cadence",
     title: "Cadence",
     imageTitle: "Dashboard",
-    src: "/project-image/cadence.png",
+    src: "/project-image/cadence.webp",
     video: "",
     description: "An open-source SaaS revenue operations dashboard for MRR/NRR tracking, account health, cohort retention, and customer signals.",
     tech: ["react", "ts", "tailwind", "charts", { label: "Vite" }],

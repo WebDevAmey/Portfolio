@@ -4,6 +4,7 @@ import { CurrentTime } from "@/components/CurrentTime";
 import { RightNavbar } from "@/components/RightNavbar";
 import { FooterBackground } from "@/components/FooterBackground";
 import { projectsData, iconMap, techNames, TechItem, TechKey } from "@/data/projectsData";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -14,6 +15,16 @@ export async function generateStaticParams() {
   return projectsData.map((project) => ({
     slug: project.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projectsData.find((p) => p.slug === slug);
+  if (!project) return { title: "Project | Amey Tarmale" };
+  return {
+    title: `${project.title} | Amey Tarmale`,
+    description: project.description,
+  };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -91,7 +102,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </div>
 
       {/* Content Section */}
-      <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-16 px-4 flex flex-col z-10 relative">
+      <div id="main-content" tabIndex={-1} className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-16 px-4 flex flex-col z-10 relative">
 
         {/* Media (Video or Image) right at the top */}
         <div className="w-full aspect-video relative mt-8 rounded-lg overflow-hidden border border-black/10 dark:border-white/[0.15] shadow-sm bg-black z-20">
@@ -115,15 +126,28 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               />
             )
           ) : (
+<>
+{project.lightModeSrc && (
             <Image 
-              src={project.src} 
-              alt={project.imageTitle} 
+              src={project.lightModeSrc} 
+              alt={`${project.title}: ${project.imageTitle}`} 
               fill 
               preload
               sizes="(min-width: 768px) 40vw, 100vw"
               quality={75}
-              className="object-cover"
+              className="object-cover object-top dark:hidden"
             />
+)}
+            <Image 
+              src={project.src} 
+              alt={`${project.title}: ${project.imageTitle}`} 
+              fill 
+              preload
+              sizes="(min-width: 768px) 40vw, 100vw"
+              quality={75}
+              className={`object-cover object-top ${project.lightModeSrc ? "hidden dark:block" : ""}`}
+            />
+</>
           )}
         </div>
 
@@ -135,29 +159,27 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
 
         {/* Action Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 items-center justify-between py-4 relative">
-          {project.github ? (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-[13px] font-medium text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-              <SiGithub className="w-4 h-4" /> Github
-            </a>
-          ) : <div />}
-          
-          {/* Vertical Divider 1 */}
-          <div className="hidden md:block absolute left-1/3 top-0 bottom-0 w-0 border-l border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
-
+        <div className="grid grid-cols-2 items-center py-4 relative">
           {project.live ? (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 text-[13px] font-medium text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-              <ExternalLink className="w-4 h-4" /> Website
+            <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-md py-1 text-[13px] font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-zinc-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:focus-visible:ring-white/40">
+              <ExternalLink className="w-4 h-4" aria-hidden="true" /> Live Demo
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          ) : (
+            <span className="flex items-center justify-center gap-2 text-[13px] text-zinc-400 dark:text-zinc-600">
+              <ExternalLink className="w-4 h-4" aria-hidden="true" /> No live demo yet
+            </span>
+          )}
+
+          {/* Vertical Divider */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0 border-l border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+
+          {project.github ? (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded-md py-1 text-[13px] font-medium text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-zinc-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:focus-visible:ring-white/40">
+              <SiGithub className="w-4 h-4" aria-hidden="true" /> GitHub
+              <span className="sr-only">(opens in a new tab)</span>
             </a>
           ) : <div />}
-          
-          {/* Vertical Divider 2 */}
-          <div className="hidden md:block absolute left-2/3 top-0 bottom-0 w-0 border-l border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
-
-          <a href="#" className="hidden md:flex items-center justify-center gap-2 text-[13px] font-medium text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="9" x2="15" y1="9" y2="9"/><line x1="9" x2="15" y1="15" y2="15"/></svg>
-            Post
-          </a>
         </div>
 
         {/* Bottom Dashed Divider */}
@@ -187,6 +209,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <p className="text-[14px] sm:text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-300">
           {project.description}
         </p>
+        {project.credit && (
+          <p className="mt-2 text-[13px] italic text-zinc-500">{project.credit}</p>
+        )}
 
         {/* Dashed Divider before Stack */}
         <div className="relative mt-8 mb-6">

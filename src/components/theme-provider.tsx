@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { MotionConfig } from "framer-motion";
 
 // Workaround for React 19 / next-themes strict mode script tag warning
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
@@ -15,5 +16,10 @@ if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
 }
 
 export function ThemeProvider({ children, ...props }: React.ComponentProps<typeof NextThemesProvider>) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+  return (
+    <NextThemesProvider {...props}>
+      {/* Respect the OS "reduce motion" setting for every framer-motion animation. */}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </NextThemesProvider>
+  );
 }

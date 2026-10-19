@@ -191,7 +191,7 @@ export function OpenSourceContributions({ isFullPage = false }: { isFullPage?: b
   return (
     <div className="w-full flex flex-col">
       <div className="py-2 relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Open Source Contributions</h2>
+        <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"><span aria-hidden="true" className="mr-2 align-[1px] font-mono text-[11px] font-normal tracking-normal text-zinc-400 dark:text-zinc-500">04</span>Open Source Contributions</h2>
 
         {/* Toggle */}
         <div className="flex items-center gap-2 relative z-20 group mr-[8px]">

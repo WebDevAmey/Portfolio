@@ -191,3 +191,36 @@ body {
   }
 
 }
+
+/* Visible keyboard focus everywhere, without affecting mouse clicks. */
+:where(a, button, [role="button"], input, textarea, select, summary, [tabindex]):focus-visible {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
+  outline-color: color-mix(in oklch, currentColor 55%, transparent);
+  border-radius: 4px;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--color-foreground) 16%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

@@ -193,6 +193,7 @@ const DisplacementText = ({
       (shaderMaterial.uniforms.uDisplacement.value as THREE.Vector3).copy(
         intersection.point
       );
+      requestRender();
     };
 
     container.addEventListener("pointermove", onPointerMove);
@@ -209,17 +210,23 @@ const DisplacementText = ({
       camera.bottom = -cameraDistance;
       camera.updateProjectionMatrix();
       renderer.setSize(nextRect.width, nextRect.height, false);
+      requestRender();
     };
 
     window.addEventListener("resize", handleResize);
 
+    // Render on demand: the scene only changes on pointer move, resize, or a
+    // theme change, so there is no need to redraw every frame.
     let animationId = 0;
-    const renderScene = () => {
-      animationId = window.requestAnimationFrame(renderScene);
-      renderer.render(scene, camera);
+    const requestRender = () => {
+      if (animationId) return;
+      animationId = window.requestAnimationFrame(() => {
+        animationId = 0;
+        renderer.render(scene, camera);
+      });
     };
 
-    renderScene();
+    requestRender();
 
     const replaceTexture = (nextColor: string) => {
       const nextTexture = createTextTexture(text, fontSize, font, nextColor);
@@ -228,6 +235,7 @@ const DisplacementText = ({
       textTexture.dispose();
       textTexture = nextTexture;
       currentColor = nextColor;
+      requestRender();
     };
 
     let observer: MutationObserver | undefined;

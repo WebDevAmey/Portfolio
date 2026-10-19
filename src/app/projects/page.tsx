@@ -91,7 +91,7 @@ export default function AllProjectsPage() {
         </div>
 
         {/* Content Section */}
-        <div
+        <div id="main-content" tabIndex={-1}
           className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-16 px-4 flex flex-col z-10 relative"
         >
           <div className="relative pt-6 pb-6">
@@ -154,9 +154,14 @@ export default function AllProjectsPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Project video"
               className="relative bg-black rounded-xl overflow-hidden w-[90%] max-w-3xl shadow-2xl"
             >
               <button
+                type="button"
+                aria-label="Close video"
                 onClick={() => setActiveVideo(null)}
                 className="absolute top-3 right-3 p-2 bg-neutral-800/80 hover:bg-neutral-700 rounded-full cursor-pointer transition-colors z-50"
               >

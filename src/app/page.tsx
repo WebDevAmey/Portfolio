@@ -59,7 +59,7 @@ const skills = [
   { name: "Python", icon: SiPython },
   { name: "LangGraph", icon: SiLangchain },
   { name: "Git", icon: SiGit },
-  { name: "Github", icon: SiGithub },
+  { name: "GitHub", icon: SiGithub },
 ];
 
 const lightBannerPlaceholder =
@@ -170,7 +170,7 @@ export default function Home() {
       </div>
 
       {/* Flowing Content Section */}
-      <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative min-h-screen">
+      <div id="main-content" tabIndex={-1} className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative min-h-screen">
         <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4">
           Full-stack web developer building fast, polished, production-ready interfaces, from component libraries to complete products.
         </p>
@@ -245,7 +245,7 @@ export default function Home() {
           <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
 
           <div className="py-2 relative">
-            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Experiences</h2>
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"><span aria-hidden="true" className="mr-2 align-[1px] font-mono text-[11px] font-normal tracking-normal text-zinc-400 dark:text-zinc-500">01</span>Experiences</h2>
             {/* Bottom full-width line */}
             <div
               className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none"
@@ -285,7 +285,7 @@ export default function Home() {
         {/* Projects */}
         <div id="projects" className="mt-0 flex flex-col relative z-10 scroll-mt-24">
           <div className="py-2 relative mt-1">
-            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Projects</h2>
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"><span aria-hidden="true" className="mr-2 align-[1px] font-mono text-[11px] font-normal tracking-normal text-zinc-400 dark:text-zinc-500">02</span>Projects</h2>
 
             {/* Horizontal line below Projects heading */}
             <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
@@ -348,7 +348,7 @@ export default function Home() {
           <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
 
           <div className="py-2 relative mt-1">
-            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Skills & Technologies</h2>
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight"><span aria-hidden="true" className="mr-2 align-[1px] font-mono text-[11px] font-normal tracking-normal text-zinc-400 dark:text-zinc-500">05</span>Skills & Technologies</h2>
 
             {/* Horizontal line below Skills heading */}
             <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />

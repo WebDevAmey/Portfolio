@@ -17,6 +17,19 @@ export type ExperienceData = {
 // cover work that is visible on github.com/WebDevAmey.
 export const experiences: ExperienceData[] = [
   {
+    title: "Freelance",
+    role: "Freelance Developer",
+    dates: "2025 - Present",
+    location: "Remote",
+    src: "https://github.com/webdevamey.png",
+    imageFit: "cover",
+    imageZoom: 1,
+    // TODO(Amey): add client work you can share. Rows without a description,
+    // tech, or metrics render without the expand control.
+    description: "",
+    tech: [],
+  },
+  {
     title: "Razorpay AI Buildathon 2026",
     role: "Builder, Track 05 (Open)",
     dates: "2026",
