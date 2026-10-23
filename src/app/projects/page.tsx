@@ -5,7 +5,7 @@ import { CommandMenu } from "@/components/command-menu";
 import { CurrentTime } from "@/components/CurrentTime";
 import { RightNavbar } from "@/components/RightNavbar";
 import { FooterBackground } from "@/components/FooterBackground";
-import { ProjectCard } from "@/components/ProjectsGrid";
+import { ProjectList } from "@/components/ProjectsGrid";
 import { projectsData } from "@/data/projectsData";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -95,39 +95,7 @@ export default function AllProjectsPage() {
           className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-16 px-4 flex flex-col z-10 relative"
         >
           <div className="relative pt-6 pb-6">
-            {/* Center Vertical Line */}
-            <div className="absolute top-0 bottom-6 left-1/2 w-0 border-r border-black/30 dark:border-white/[0.35] pointer-events-none -translate-x-1/2 hidden md:block" style={{ maskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0, black 1px, transparent 1px, transparent 6px)' }} />
-            {/* Top Center Intersection */}
-            <div className="absolute top-0 left-1/2 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20 hidden md:block" />
-
-            <div className="flex flex-col relative z-10 w-full">
-              {Array.from({ length: Math.ceil(projectsData.length / 2) }).map((_, rowIndex) => {
-                const rowProjects = projectsData.slice(rowIndex * 2, rowIndex * 2 + 2);
-                return (
-                  <div key={rowIndex} className="flex flex-col relative w-full">
-                    <div className={`grid grid-cols-1 md:grid-cols-2 gap-x-10 ${rowIndex === 0 ? 'pb-10 md:pb-6 gap-y-10 md:gap-y-0' : rowIndex === Math.ceil(projectsData.length / 2) - 1 ? 'pt-0 md:pt-6 gap-y-10 md:gap-y-0' : 'pb-10 md:pb-6 pt-0 md:pt-6 gap-y-10 md:gap-y-0'}`}>
-                      {rowProjects.map((project) => (
-                        <ProjectCard
-                          key={project.title}
-                          project={project}
-                          setActiveVideo={setActiveVideo}
-                          isPriority={rowIndex === 0}
-                        />
-                      ))}
-                    </div>
-                    {/* Horizontal Divider after each row except the last one */}
-                    {rowIndex < Math.ceil(projectsData.length / 2) - 1 && (
-                      <div className="relative w-full h-0 hidden md:block">
-                        <div className="absolute left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
-                        <div className="absolute -left-4 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
-                        <div className="absolute -right-4 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
-                        <div className="absolute left-1/2 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+            <ProjectList projects={projectsData} setActiveVideo={setActiveVideo} />
           </div>
           
           {/* Bottom Separator */}

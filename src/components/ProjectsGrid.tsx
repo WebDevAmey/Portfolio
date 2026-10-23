@@ -39,51 +39,60 @@ const GithubMark = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   </svg>
 );
 
-const actionLinkClass =
-  "relative z-30 inline-flex items-center gap-1.5 rounded-md border border-black/10 bg-white px-2.5 py-1 text-[12px] font-medium text-zinc-700 shadow-sm transition-colors hover:border-black/20 hover:text-zinc-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:border-white/10 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:border-white/20 dark:hover:text-white dark:focus-visible:ring-white/40";
+const textLinkClass =
+  "relative z-30 inline-flex items-center gap-1 rounded-sm text-[12px] font-medium text-zinc-500 underline-offset-4 transition-colors hover:text-orange-600 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:text-zinc-400 dark:hover:text-orange-400 dark:focus-visible:ring-white/40";
+
+// Title that rolls up to an accent copy on hover. Screen readers get the plain title.
+const RollingTitle = ({ text }: { text: string }) => (
+  <span className="relative inline-block overflow-hidden align-bottom leading-[1.35]">
+    <span aria-hidden="true" className="block transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-full group-focus-within:-translate-y-full motion-reduce:transition-none">
+      {text}
+    </span>
+    <span aria-hidden="true" className="absolute inset-0 block translate-y-full text-orange-600 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0 group-focus-within:translate-y-0 motion-reduce:transition-none dark:text-orange-400">
+      {text}
+    </span>
+    <span className="sr-only">{text}</span>
+  </span>
+);
 
 export const ProjectCard = ({
   project,
+  index,
   setActiveVideo,
   isPriority = false,
 }: {
   project: Project;
+  index: number;
   setActiveVideo: (v: string) => void;
   isPriority?: boolean;
 }) => {
-  const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   // Light/dark screenshots are switched with CSS so server and client markup match.
+  const imageClass =
+    "size-full object-cover object-left-top transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100";
 
   return (
-    <article className="relative flex flex-col group">
-      <div
-        className="relative w-full aspect-[1.25] rounded-xl border border-black/5 dark:border-white/5 bg-zinc-50/80 dark:bg-[#09090b]/80 shadow-sm p-3.5 pb-0 flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 group-hover:shadow-md group-hover:border-black/10 dark:group-hover:border-white/10 group-focus-within:border-black/15 dark:group-focus-within:border-white/15 sm:aspect-[1.4] sm:p-4 sm:pb-0"
-      >
-        <div className="flex items-center justify-between z-10 min-h-[24px]">
-          {project.hasPin ? (
-            <span className="inline-flex items-center gap-1 rounded-[6px] border border-zinc-200/80 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-zinc-500 dark:border-zinc-800/80 dark:text-zinc-400">
-              <svg viewBox="0 0 24 24" className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M12 17v5" /><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" />
-              </svg>
-              Featured
-            </span>
-          ) : <span />}
-        </div>
-
-        {/* Ambient Hover Background */}
-        {project.backgroundImage && (
-          <div className="absolute inset-0 scale-100 opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:scale-[1.03] group-hover:opacity-100 motion-reduce:transition-none">
-            <Image
-              src={project.backgroundImage}
-              alt=""
-              aria-hidden="true"
-              fill
-              sizes="(min-width: 768px) 320px, calc(100vw - 2rem)"
-              quality={70}
-              className="object-cover"
-            />
-          </div>
+    <article className="group relative flex flex-col">
+      <div className="relative aspect-[3/2] w-full overflow-hidden rounded-md bg-zinc-100 ring-1 ring-black/5 dark:bg-zinc-900 dark:ring-white/10">
+        {project.lightModeSrc && (
+          <Image
+            src={project.lightModeSrc}
+            alt={`${project.title}: ${project.imageTitle}`}
+            fill
+            preload={isPriority}
+            sizes="(min-width: 768px) 40vw, calc(100vw - 2rem)"
+            quality={80}
+            className={`${imageClass} dark:hidden`}
+          />
         )}
+        <Image
+          src={project.src}
+          alt={`${project.title}: ${project.imageTitle}`}
+          fill
+          preload={isPriority}
+          sizes="(min-width: 768px) 40vw, calc(100vw - 2rem)"
+          quality={80}
+          className={`${imageClass} ${project.lightModeSrc ? "hidden dark:block" : ""}`}
+        />
 
         {project.video && (
           <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
@@ -101,138 +110,74 @@ export const ProjectCard = ({
             </button>
           </div>
         )}
-
-        {/* Floating screenshot sitting directly at the bottom of the outer wrapper */}
-        <div
-          className="absolute bottom-0 left-1/2 z-20 h-[78%] w-[85%] origin-bottom rounded-t-[10px] border border-b-0 border-black/5 bg-white p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)] -translate-x-1/2 transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:transform-none"
-        >
-          <div className="size-full overflow-hidden rounded-t-[9px]">
-            {project.lightModeSrc && (
-              <Image
-                src={project.lightModeSrc}
-                alt={`${project.title}: ${project.imageTitle}`}
-                width={600}
-                height={400}
-                preload={isPriority}
-                sizes="(min-width: 768px) 17vw, calc(100vw - 2rem)"
-                quality={70}
-                className="size-full object-cover object-left-top dark:hidden"
-              />
-            )}
-            <Image
-              src={project.src}
-              alt={`${project.title}: ${project.imageTitle}`}
-              width={600}
-              height={400}
-              preload={isPriority}
-              sizes="(min-width: 768px) 17vw, calc(100vw - 2rem)"
-              quality={70}
-              className={`size-full object-cover object-left-top ${project.lightModeSrc ? "hidden dark:block" : ""}`}
-            />
-          </div>
-        </div>
       </div>
 
-      {/* Content Area directly below the wrapper */}
-      <div className="mt-4 flex flex-col px-0.5">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-[15px] font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 leading-tight">
-            {/* Stretched link: the whole card opens the project page */}
-            <Link
-              href={`/projects/${project.slug}`}
-              className="rounded-sm after:absolute after:inset-0 after:z-20 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:focus-visible:ring-white/40"
-            >
-              {project.title}
-            </Link>
-          </h3>
+      <div className="mt-3 flex items-baseline justify-between gap-4">
+        <h3 className="text-[17px] font-medium tracking-[-0.02em] text-zinc-900 dark:text-zinc-100">
+          {/* Stretched link: the whole card opens the project page */}
+          <Link
+            href={`/projects/${project.slug}`}
+            className="rounded-sm after:absolute after:inset-0 after:z-20 after:content-[''] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/40 dark:focus-visible:ring-white/40"
+          >
+            <RollingTitle text={project.title} />
+          </Link>
+        </h3>
+        <span aria-hidden="true" className="font-mono text-[13px] font-medium tracking-[-0.03em] text-zinc-400 dark:text-zinc-500">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
 
+      <p className="mt-1 text-[13px] font-medium leading-relaxed tracking-[-0.01em] text-zinc-500 dark:text-zinc-400">
+        {project.description}
+      </p>
+      {project.credit && (
+        <p className="mt-1 text-[12px] italic text-zinc-400 dark:text-zinc-500">{project.credit}</p>
+      )}
+
+      {(project.live || project.github) && (
+        <div className="mt-2.5 flex items-center gap-4">
           {project.live && (
-            <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-zinc-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900/50 w-fit shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-              <span className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">Live</span>
-            </span>
-          )}
-        </div>
-
-        <p className="mt-2 sm:mt-1.5 text-[13px] text-zinc-600 dark:text-zinc-400 leading-relaxed pr-2">
-          {project.description}
-        </p>
-        {project.credit && (
-          <p className="mt-1.5 text-[12px] italic text-zinc-500 dark:text-zinc-500">{project.credit}</p>
-        )}
-
-        <ul className="flex gap-2 flex-wrap items-center mt-3" aria-label={`${project.title} tech stack`}>
-          {project.tech.map((item) => {
-            const key = typeof item === "string" ? item : item.label;
-            const isIconItem = typeof item === "string";
-            const tooltipText = isIconItem ? techNames[item] : item.tooltip || item.label;
-            const uniqueId = `${project.title}-${key}`;
-
-            return (
-              <li
-                key={key}
-                className="relative z-30"
-                onMouseEnter={() => setHoveredTech(uniqueId)}
-                onMouseLeave={() => setHoveredTech(null)}
-              >
-                {isIconItem ? (
-                  (() => {
-                    const TechIcon = iconMap[item];
-                    return (
-                      <>
-                        <TechIcon className="w-4 h-4 md:w-3.5 md:h-3.5 text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors" />
-                        <span className="sr-only">{tooltipText}</span>
-                      </>
-                    );
-                  })()
-                ) : (
-                  <span className="px-1.5 py-0.5 rounded border border-black/20 dark:border-white/[0.15] text-[10px] text-zinc-600 dark:text-zinc-400 leading-none">
-                    {item.label}
-                  </span>
-                )}
-                <AnimatePresence>
-                  {hoveredTech === uniqueId && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 5 }}
-                      aria-hidden="true"
-                      className="absolute -top-7 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
-                    >
-                      <div className="bg-zinc-800 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-900 text-[10px] px-2 py-0.5 rounded shadow-xl whitespace-nowrap">
-                        {tooltipText}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </li>
-            );
-          })}
-        </ul>
-
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" className={actionLinkClass}>
+            <a href={project.live} target="_blank" rel="noopener noreferrer" className={textLinkClass}>
               Live Demo
               <ArrowUpRight />
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           )}
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className={actionLinkClass}>
-              <GithubMark />
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className={textLinkClass}>
+              <GithubMark className="w-3 h-3" />
               GitHub
               <span className="sr-only">(opens in a new tab)</span>
             </a>
           )}
-          <span className="ml-auto inline-flex size-6 items-center justify-center rounded-md text-zinc-400 transition-[color,transform] duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-900 dark:text-zinc-500 dark:group-hover:text-zinc-100 motion-reduce:transform-none" aria-hidden="true">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </span>
         </div>
-      </div>
+      )}
     </article>
   );
 };
+
+export function ProjectList({
+  projects,
+  setActiveVideo,
+}: {
+  projects: Project[];
+  setActiveVideo: (v: string) => void;
+}) {
+  return (
+    <ul className="relative z-10 flex w-full flex-col gap-12">
+      {projects.map((project, index) => (
+        <li key={project.slug}>
+          <ProjectCard
+            project={project}
+            index={index}
+            setActiveVideo={setActiveVideo}
+            isPriority={index === 0}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function ProjectsGrid() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -247,30 +192,7 @@ export function ProjectsGrid() {
 
   return (
     <>
-      <div className="flex flex-col relative z-10 w-full">
-        {/* Row 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 md:gap-y-0 pb-10 md:pb-6">
-          {projectsData.slice(0, 2).map((project) => (
-            <ProjectCard key={project.title} project={project} setActiveVideo={setActiveVideo} />
-          ))}
-        </div>
-
-        {/* Middle Horizontal Line Container */}
-        <div className="relative w-full h-0 hidden md:block">
-          <div className="absolute left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
-          {/* Intersections */}
-          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
-          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
-          <div className="absolute top-0 left-1/2 w-[2px] h-[2px] bg-black/40 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
-        </div>
-
-        {/* Row 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10 md:gap-y-0 pt-0 md:pt-6">
-          {projectsData.slice(2, 4).map((project) => (
-            <ProjectCard key={project.title} project={project} setActiveVideo={setActiveVideo} />
-          ))}
-        </div>
-      </div>
+      <ProjectList projects={projectsData.slice(0, 4)} setActiveVideo={setActiveVideo} />
 
       {/* MODAL */}
       <AnimatePresence>
