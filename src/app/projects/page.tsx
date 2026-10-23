@@ -6,6 +6,7 @@ import { CurrentTime } from "@/components/CurrentTime";
 import { RightNavbar } from "@/components/RightNavbar";
 import { FooterBackground } from "@/components/FooterBackground";
 import { ProjectList } from "@/components/ProjectsGrid";
+import { WorksRing } from "@/components/WorksRing";
 import { projectsData } from "@/data/projectsData";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -95,7 +96,14 @@ export default function AllProjectsPage() {
           className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-16 px-4 flex flex-col z-10 relative"
         >
           <div className="relative pt-6 pb-6">
-            <ProjectList projects={projectsData} setActiveVideo={setActiveVideo} />
+            <WorksRing
+              projects={projectsData}
+              minCards={14}
+              className="relative left-1/2 hidden h-[calc(78vh-150px)] min-h-[440px] w-screen -translate-x-1/2 md:block"
+            />
+            <div className="md:hidden">
+              <ProjectList projects={projectsData} setActiveVideo={setActiveVideo} />
+            </div>
           </div>
           
           {/* Bottom Separator */}

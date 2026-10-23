@@ -224,3 +224,23 @@ body {
     animation: none !important;
   }
 }
+
+/* Works ring label: letters roll up into place one after another. */
+@keyframes works-letter-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.works-letter {
+  animation: works-letter-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works-letter {
+    animation: none;
+  }
+}

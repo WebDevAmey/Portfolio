@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 
+import { WorksRing } from "@/components/WorksRing";
+
 import {
   type TechIcon,
   type TechKey,
@@ -192,7 +194,10 @@ export function ProjectsGrid() {
 
   return (
     <>
-      <ProjectList projects={projectsData.slice(0, 4)} setActiveVideo={setActiveVideo} />
+      <WorksRing projects={projectsData.slice(0, 4)} minCards={8} className="hidden h-[420px] md:block" />
+      <div className="md:hidden">
+        <ProjectList projects={projectsData.slice(0, 4)} setActiveVideo={setActiveVideo} />
+      </div>
 
       {/* MODAL */}
       <AnimatePresence>
