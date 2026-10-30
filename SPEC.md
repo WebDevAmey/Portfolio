@@ -12,23 +12,23 @@ Non-goals: blog, CMS, light theme, sound effects, GitHub API widgets.
 
 ## 2. Current state (audit, 2026-10-30)
 
-| Area | Finding |
-| --- | --- |
-| Repo | `WebDevAmey/Portfolio`, default branch `main`, 5 commits, all authored as `WebDevAmey <159521019+WebDevAmey@users.noreply.github.com>`. |
-| Stack | Next.js 16.2 (App Router), React 19.2, TypeScript (strict), Tailwind CSS v4, ESLint 9 with `eslint-config-next`. Deployed on Vercel with `@vercel/analytics` and `@vercel/speed-insights`. |
-| Origin | Built on an open-source template (Ashutosh Singh's Portfolio-v2). Ships framer-motion, gsap, three, cmdk, radix, next-themes, react-icons, shadcn and a sound engine. Most of it is template weight. |
-| Routes | `/`, `/projects`, `/projects/[slug]`, `/experience`, `/contact` (FormSubmit form), `/pull-requests`, `/highlights`, `/blogs/[slug]`, `/api/github`. |
-| Identity | Name Amey Tarmale; tagline "Full-Stack Web Developer"; bio bullets about React/Next/Node/MongoDB, caring about animation and clean component APIs. |
-| Contact | Email `ameytarmale7@gmail.com` (used by the contact form). GitHub `WebDevAmey`, X `@ameytwtcorp`, LinkedIn `amey-tarmale-64b499241`. |
-| Resume | No resume file or link exists anywhere in the repo or on the live site. |
-| Projects | 14 in `src/data/projectsData.ts`: Textlab, Mission Planner, System Design Mafia (credit: Atharva Arbat), ResearchGraph, Seam, ButtonLab, MiniKV, HoveraUI, Gatekeep, Cadence, Karagiri, AI Summit Explorer, loom, Lead Agent. All have `.webp` thumbnails in `public/project-image/`. |
-| OVRT | Not on the site or in the repo. Added from the brief; https://ovrt.in confirms it (AI co-pilot for Shopify stores, built for Indian D2C brands). No thumbnail, so it gets a generated placeholder. |
-| Education | MIT-WPU is not mentioned anywhere. Taken from the brief. |
-| SEO | Title "Amey Tarmale", description, OG + Twitter (`@ameytwtcorp`) with `/og-image.jpg`, favicon/icon/apple-icon. No sitemap or robots. `metadataBase` falls back to the Vercel URL. |
-| Quote | Footer shows one fixed quote (Alex Hormozi). |
+| Area       | Finding                                                                                                                                                                                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repo       | `WebDevAmey/Portfolio`, default branch `main`, 5 commits, all authored as `WebDevAmey <159521019+WebDevAmey@users.noreply.github.com>`.                                                                                                                                                            |
+| Stack      | Next.js 16.2 (App Router), React 19.2, TypeScript (strict), Tailwind CSS v4, ESLint 9 with `eslint-config-next`. Deployed on Vercel with `@vercel/analytics` and `@vercel/speed-insights`.                                                                                                         |
+| Origin     | Built on an open-source template (Ashutosh Singh's Portfolio-v2). Ships framer-motion, gsap, three, cmdk, radix, next-themes, react-icons, shadcn and a sound engine. Most of it is template weight.                                                                                               |
+| Routes     | `/`, `/projects`, `/projects/[slug]`, `/experience`, `/contact` (FormSubmit form), `/pull-requests`, `/highlights`, `/blogs/[slug]`, `/api/github`.                                                                                                                                                |
+| Identity   | Name Amey Tarmale; tagline "Full-Stack Web Developer"; bio bullets about React/Next/Node/MongoDB, caring about animation and clean component APIs.                                                                                                                                                 |
+| Contact    | Email `ameytarmale7@gmail.com` (used by the contact form). GitHub `WebDevAmey`, X `@ameytwtcorp`, LinkedIn `amey-tarmale-64b499241`.                                                                                                                                                               |
+| Resume     | No resume file or link exists anywhere in the repo or on the live site.                                                                                                                                                                                                                            |
+| Projects   | 14 in `src/data/projectsData.ts`: Textlab, Mission Planner, System Design Mafia (credit: Atharva Arbat), ResearchGraph, Seam, ButtonLab, MiniKV, HoveraUI, Gatekeep, Cadence, Karagiri, AI Summit Explorer, loom, Lead Agent. All have `.webp` thumbnails in `public/project-image/`.              |
+| OVRT       | Not on the site or in the repo. Added from the brief; https://ovrt.in confirms it (AI co-pilot for Shopify stores, built for Indian D2C brands). No thumbnail, so it gets a generated placeholder.                                                                                                 |
+| Education  | MIT-WPU is not mentioned anywhere. Taken from the brief.                                                                                                                                                                                                                                           |
+| SEO        | Title "Amey Tarmale", description, OG + Twitter (`@ameytwtcorp`) with `/og-image.jpg`, favicon/icon/apple-icon. No sitemap or robots. `metadataBase` falls back to the Vercel URL.                                                                                                                 |
+| Quote      | Footer shows one fixed quote (Alex Hormozi).                                                                                                                                                                                                                                                       |
 | Works ring | `src/components/WorksRing.tsx` (from the earlier thread): rAF-driven elliptical ring, idle drift, scroll and drag momentum, entrance fan-out, hover spotlight (grayscale + brightness), rolling letter label. Mouse/focus only, no arrow-key cycling, no description, mobile falls back to a list. |
-| Tooling | Only `dev`, `build`, `start`, `lint`. No tests, typecheck script or Prettier. |
-| References | The vibrant.design CDN is blocked from the build environment (HTTP 403), so no frame sheets or videos could be viewed. The written profiles were used; the two references without profiles (Josh Puckett, shawn.) are ignored. |
+| Tooling    | Only `dev`, `build`, `start`, `lint`. No tests, typecheck script or Prettier.                                                                                                                                                                                                                      |
+| References | The vibrant.design CDN is blocked from the build environment (HTTP 403), so no frame sheets or videos could be viewed. The written profiles were used; the two references without profiles (Josh Puckett, shawn.) are ignored.                                                                     |
 
 ### Stack decision
 
@@ -57,17 +57,17 @@ All in `src/styles/tokens.css` as CSS custom properties, mapped into Tailwind wi
 
 ### Color
 
-| Token | Value | Use | Contrast on `--ink` |
-| --- | --- | --- | --- |
-| `--ink` | `#0A0A0B` | page background | |
-| `--ink-2` | `#121316` | raised surfaces (pills, cards) | |
-| `--line` | `rgba(255,255,255,0.08)` | hairlines | decorative |
-| `--line-strong` | `rgba(255,255,255,0.16)` | badge outline, hover hairline | decorative |
-| `--cobalt` | `#0047FF` | fills, glows, icon tiles, card sweep | 3.15:1 (non-text only) |
-| `--cobalt-bright` | `#4A7AFF` | text links, focus ring (same hue, lighter) | 5.20:1, 4.88:1 on ink-2 |
-| `--lime` | `#C6FF1A` | status dot, cursor, active marks, shards | 16.7:1 |
-| `--paper` | `#F4F4F0` | primary text | 17.95:1 |
-| `--mute` | `rgba(244,244,240,0.56)` | secondary text | 5.95:1, 5.59:1 on ink-2 |
+| Token             | Value                    | Use                                        | Contrast on `--ink`     |
+| ----------------- | ------------------------ | ------------------------------------------ | ----------------------- |
+| `--ink`           | `#0A0A0B`                | page background                            |                         |
+| `--ink-2`         | `#121316`                | raised surfaces (pills, cards)             |                         |
+| `--line`          | `rgba(255,255,255,0.08)` | hairlines                                  | decorative              |
+| `--line-strong`   | `rgba(255,255,255,0.16)` | badge outline, hover hairline              | decorative              |
+| `--cobalt`        | `#0047FF`                | fills, glows, icon tiles, card sweep       | 3.15:1 (non-text only)  |
+| `--cobalt-bright` | `#4A7AFF`                | text links, focus ring (same hue, lighter) | 5.20:1, 4.88:1 on ink-2 |
+| `--lime`          | `#C6FF1A`                | status dot, cursor, active marks, shards   | 16.7:1                  |
+| `--paper`         | `#F4F4F0`                | primary text                               | 17.95:1                 |
+| `--mute`          | `rgba(244,244,240,0.56)` | secondary text                             | 5.95:1, 5.59:1 on ink-2 |
 
 Paper on cobalt is 5.69:1, ink on lime is 16.7:1. Raw `--cobalt` fails AA for text and for 3:1 non-text on `--ink-2`, so `--cobalt-bright` was added as the minimal adjustment for text and focus rings. No other hues. Project thumbnails are content and keep their own colors, but inactive cards are desaturated in the ring.
 
@@ -80,14 +80,14 @@ Lime budget: dot, cursor, active-word underline, CTA shards, selection highlight
 
 Fluid scale (`clamp`, 360 → 1440px):
 
-| Token | Size | Line height | Use |
-| --- | --- | --- | --- |
-| `--step-hero` | `clamp(2.25rem, 1.3rem + 4.2vw, 5.25rem)` | 1.12 | hero sentence |
-| `--step-3` | `clamp(1.75rem, 1.2rem + 2.4vw, 3.5rem)` | 1.05 | section statements |
-| `--step-2` | `clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem)` | 1.3 | about, quote |
-| `--step-1` | `1.0625rem` | 1.55 | body |
-| `--step-0` | `0.875rem` | 1.5 | small text |
-| `--step-mono` | `0.6875rem` | 1.4 | mono labels, tracking 0.14em |
+| Token         | Size                                       | Line height | Use                          |
+| ------------- | ------------------------------------------ | ----------- | ---------------------------- |
+| `--step-hero` | `clamp(2.25rem, 1.3rem + 4.2vw, 5.25rem)`  | 1.12        | hero sentence                |
+| `--step-3`    | `clamp(1.75rem, 1.2rem + 2.4vw, 3.5rem)`   | 1.05        | section statements           |
+| `--step-2`    | `clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem)` | 1.3         | about, quote                 |
+| `--step-1`    | `1.0625rem`                                | 1.55        | body                         |
+| `--step-0`    | `0.875rem`                                 | 1.5         | small text                   |
+| `--step-mono` | `0.6875rem`                                | 1.4         | mono labels, tracking 0.14em |
 
 ### Space, radius, motion
 
@@ -99,19 +99,19 @@ Fluid scale (`clamp`, 360 → 1440px):
 
 ## 5. Components
 
-| Component | Path | Notes |
-| --- | --- | --- |
-| `SiteHeader` | `components/site-header.tsx` | Sticky, 56px, translucent ink with blur, hairline bottom after scroll. Skip link. |
-| `StatusBadge` | `components/status-badge.tsx` | Outlined pill, lime dot with slow pulse (static under reduced motion), mono label. |
-| `MorphPill` | `components/morph-pill.tsx` | Inline pill: icon tile + word. Stacks all words in one grid cell so width is reserved. |
-| `Hero` | `sections/hero.tsx` | `h1` with sr-only stable sentence and animated visual copy; pause toggle. |
-| `WorksRing` | `components/works-ring.tsx` | Evolved from the existing ring (see 6.2). |
-| `WorksBento` | `components/works-bento.tsx` | Featured projects in an asymmetric grid, then an index list. |
+| Component      | Path                           | Notes                                                                                  |
+| -------------- | ------------------------------ | -------------------------------------------------------------------------------------- |
+| `SiteHeader`   | `components/site-header.tsx`   | Sticky, 56px, translucent ink with blur, hairline bottom after scroll. Skip link.      |
+| `StatusBadge`  | `components/status-badge.tsx`  | Outlined pill, lime dot with slow pulse (static under reduced motion), mono label.     |
+| `MorphPill`    | `components/morph-pill.tsx`    | Inline pill: icon tile + word. Stacks all words in one grid cell so width is reserved. |
+| `Hero`         | `sections/hero.tsx`            | `h1` with sr-only stable sentence and animated visual copy; pause toggle.              |
+| `WorksRing`    | `components/works-ring.tsx`    | Evolved from the existing ring (see 6.2).                                              |
+| `WorksBento`   | `components/works-bento.tsx`   | Featured projects in an asymmetric grid, then an index list.                           |
 | `ProjectThumb` | `components/project-thumb.tsx` | Real image or generated cobalt/ink/lime placeholder; carries the view-transition name. |
-| `CursorDot` | `components/cursor-dot.tsx` | Fine-pointer only. Small lime dot that grows into a "View" ring over cards. |
-| `SquishButton` | `components/squish-button.tsx` | The contact CTA (see 6.4). |
-| `DailyQuote` | `components/daily-quote.tsx` | Client component, reserved height, word reveal. |
-| `Icon` set | `components/icons.tsx` | Original 24px stroke icons, `currentColor`. |
+| `CursorDot`    | `components/cursor-dot.tsx`    | Fine-pointer only. Small lime dot that grows into a "View" ring over cards.            |
+| `SquishButton` | `components/squish-button.tsx` | The contact CTA (see 6.4).                                                             |
+| `DailyQuote`   | `components/daily-quote.tsx`   | Client component, reserved height, word reveal.                                        |
+| `Icon` set     | `components/icons.tsx`         | Original 24px stroke icons, `currentColor`.                                            |
 
 ## 6. Interaction specs
 
@@ -119,12 +119,12 @@ Fluid scale (`clamp`, 360 → 1440px):
 
 Copy (original, first person): "I build **[products]** for **[founders]**, sweat the **[motion]**, and ship from **[Pune]**." Each bracket is a pill that cycles:
 
-| Slot | Words |
-| --- | --- |
-| 1 | products · agents · interfaces · libraries |
-| 2 | founders · D2C brands · developers · curious people |
-| 3 | motion · details · latency · typography |
-| 4 | Pune · the terminal · first principles · late nights |
+| Slot | Words                                                |
+| ---- | ---------------------------------------------------- |
+| 1    | products · agents · interfaces · libraries           |
+| 2    | founders · D2C brands · developers · curious people  |
+| 3    | motion · details · latency · typography              |
+| 4    | Pune · the terminal · first principles · late nights |
 
 - States: idle → out (squash `scale(1.12, .55)`, `blur(6px)`, opacity 0, `--dur-fast`, `--ease-in`) → in (from `scale(.6)` + blur to rest, `--dur-slow`, `--ease-spring`).
 - The icon tile swaps with a short rotate/scale.
@@ -176,8 +176,8 @@ Four first-person sentences (draft, **needs Amey's review**) plus a mono fact li
 type Project = {
   slug: string;
   name: string;
-  summary: string;        // one line, ≤ 90 chars, used in ring caption and bento
-  description: string;    // full paragraph for the case study
+  summary: string; // one line, ≤ 90 chars, used in ring caption and bento
+  description: string; // full paragraph for the case study
   kind: "Product" | "Library" | "Agent" | "Tool" | "Systems";
   role?: string;
   stack: string[];

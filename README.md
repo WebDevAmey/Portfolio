@@ -15,15 +15,15 @@ npm run dev        # http://localhost:3000
 
 ## Scripts
 
-| Script | What it does |
-| --- | --- |
-| `npm run dev` | Development server |
-| `npm run build` | Production build (all pages are static) |
-| `npm start` | Serve the production build |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Vitest, then the quote tests again under three time zones |
-| `npm run format` | Prettier |
+| Script              | What it does                                              |
+| ------------------- | --------------------------------------------------------- |
+| `npm run dev`       | Development server                                        |
+| `npm run build`     | Production build (all pages are static)                   |
+| `npm start`         | Serve the production build                                |
+| `npm run lint`      | ESLint                                                    |
+| `npm run typecheck` | `tsc --noEmit`                                            |
+| `npm test`          | Vitest, then the quote tests again under three time zones |
+| `npm run format`    | Prettier                                                  |
 
 ## Structure
 
