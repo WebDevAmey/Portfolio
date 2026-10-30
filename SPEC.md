@@ -2,13 +2,24 @@
 
 Owner: Amey Tarmale · Branch: `revamp/v2` · Live: https://www.ameytarmale.site
 
+> **Revision 2 (black and white, koi pond).** After reviewing the first build, Amey asked for a cleaner, minimal, black-and-white site with an animated koi pond at the centre, no custom cursor and a better footer. This revision supersedes the dark cobalt/lime palette, the display font cut, the magnetic cursor, the header and the footer described below; everything else still applies.
+>
+> - **Palette.** Black on warm white: `--bg #F7F7F5`, `--surface #FFF`, `--chip #ECECEA`, `--fg #111`, `--fg-2 #2A2A2A`, `--mute #666` (5.35:1 on bg, 4.85:1 on chip), hairlines at 8% and 16% black. No accent hue. The pond is the only colour on the page; project screenshots stay grayscale in the ring until a card is active.
+> - **Type.** One Bricolage text cut (weights 400 to 600) plus JetBrains Mono for labels. Headings are semibold at modest sizes.
+> - **Layout.** One centred column (`--measure` 40rem) for all text, so left edges line up down the page; the pond, bento grid and case-study images use a wider column (`--wide` 60rem). A floating, centred pill nav with a round home mark.
+> - **Koi pond.** Original canvas scene under the nav (`components/pond-canvas.tsx`, `lib/pond/*`): a painted pond floor with stones, WebGL caustic light (cellular-noise edges), five koi with a follow-the-leader spine that wander, school loosely and drift toward the pointer, ripples on pointer move, and a dart away from a tap. Edges are feathered with a CSS mask. The engine is code-split and starts in `requestIdleCallback`; it only animates while on screen and the tab is visible. Reduced motion renders a single still frame. Without WebGL the pond renders without caustics.
+> - **Hero.** Below the pond: greeting and status badge, the morphing pill sentence, a short line with bold keywords, then Pause, Shuffle and a link to the work.
+> - **Contact.** A centred white card with the same squishy "Get in touch" pill, now black; shards are black and greys.
+> - **Footer.** Line of the day, then three columns (Navigate, Elsewhere, Contact with live Pune time), a copyright row with "Back to top", and a large faint wordmark.
+> - **Removed.** `CursorDot` and the display font file.
+
 ## 1. Goals
 
 1. Replace the template-derived site with a single, minimal, dark page that reads as Amey's own: black, cobalt and acid lime, large type, hairlines, a few memorable interactions.
 2. Tell the story in under a minute: who he is (hero), what he has built (works), why (about), how to reach him (contact), plus one small daily delight (quote footer).
 3. Hit Lighthouse 95+ on mobile in all four categories, CLS ≈ 0, with every interaction usable by keyboard and with reduced motion.
 
-Non-goals: blog, CMS, light theme, sound effects, GitHub API widgets.
+Non-goals: blog, CMS, theme toggle, sound effects, GitHub API widgets.
 
 ## 2. Current state (audit, 2026-10-30)
 
@@ -40,12 +51,12 @@ Single page, anchored sections, plus generated case-study pages.
 
 ```
 /                     Home
-  header              Wordmark · Work · About · Contact · Resume
-  #top     Hero       Status badge + morphing pill sentence
+  header              Home mark · Work · About · Contact · Resume (floating pill)
+  #top     Hero       Koi pond, then status badge + morphing pill sentence
   #work    Works      Desktop: ring spotlight. Tablet/mobile: bento + index list
   #about   About      4 sentences + fact list
   #contact Contact    Statement + squishy "Get in touch" CTA + direct links
-  footer              Daily quote · socials · colophon
+  footer              Daily quote · link columns · Pune time · back to top · wordmark
 /projects/[slug]      Case study (static, one per project), shares the thumbnail via View Transition
 ```
 

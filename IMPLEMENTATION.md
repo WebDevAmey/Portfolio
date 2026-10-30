@@ -50,6 +50,11 @@ Companion to `SPEC.md`. Each step is one or two commits on `revamp/v2`. Run `npm
 - [x] **12. Docs**
   - README: setup, scripts, structure, adding a project, editing quotes.
   - `docs: rewrite readme for v2`
+- [x] **12b. Revision 2: black and white, koi pond**
+  - Remove the magnetic cursor and the display font; monochrome tokens; centred pill nav.
+  - `lib/pond/*` and `components/pond-canvas.tsx`; hero intro under the pond.
+  - Restyle works, about, contact and the case study; redesign the footer with `components/local-time.tsx`.
+  - `refactor: remove the custom cursor and display font`, `feat(pond): …`, `style: …`, `feat(footer): …`
 - [ ] **13. Deploy**
   - Push `revamp/v2`; Vercel builds a preview automatically. Merge to `main` only after Amey approves.
 
@@ -66,12 +71,13 @@ src/
     projects/[slug]/page.tsx
     not-found.tsx
   components/             site-header, site-footer, status-badge, morph-pill, icons,
-                          project-thumb, works-ring, works-bento, cursor-dot,
-                          squish-button, daily-quote
+                          project-thumb, works-ring, works-bento, pond-canvas,
+                          squish-button, daily-quote, local-time
   sections/               hero, works, about, contact
   data/                   site.ts, projects.ts, quotes.json
   lib/                    motion.ts, quotes.ts, quotes.test.ts, shards.ts,
                           use-reduced-motion.ts, project-art.ts
+  lib/pond/               engine.ts, koi.ts, scenery.ts, caustics.ts, random.ts
   styles/tokens.css
 public/project-image/     existing thumbnails (dark variants only)
 ```
