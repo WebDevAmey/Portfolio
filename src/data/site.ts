@@ -10,7 +10,8 @@ export const site = {
   email: "ameytarmale7@gmail.com",
   // TODO(Amey): point this at /resume.pdf once a resume is added to public/.
   resumeUrl: "https://www.linkedin.com/in/amey-tarmale-64b499241",
-  status: "Building OVRT · open to collaborations",
+  status: "Building OVRT",
+  statusDetail: "open to collaborations",
   location: "Pune, India",
   socials: [
     { label: "GitHub", href: "https://github.com/WebDevAmey", handle: "WebDevAmey" },
@@ -53,25 +54,25 @@ export const heroSlots: HeroWord[][] = [
   [
     { word: "products", icon: "cube" },
     { word: "agents", icon: "orbit" },
-    { word: "interfaces", icon: "window" },
-    { word: "libraries", icon: "layers" },
+    { word: "systems", icon: "layers" },
+    { word: "tools", icon: "window" },
   ],
   [
     { word: "founders", icon: "flag" },
-    { word: "D2C brands", icon: "bag" },
-    { word: "developers", icon: "brackets" },
-    { word: "curious people", icon: "eye" },
+    { word: "builders", icon: "brackets" },
+    { word: "startups", icon: "bag" },
+    { word: "makers", icon: "eye" },
   ],
   [
     { word: "motion", icon: "curve" },
     { word: "details", icon: "target" },
     { word: "latency", icon: "timer" },
-    { word: "typography", icon: "glyph" },
+    { word: "pixels", icon: "glyph" },
   ],
   [
     { word: "Pune", icon: "pin" },
-    { word: "the terminal", icon: "prompt" },
-    { word: "first principles", icon: "axiom" },
-    { word: "late nights", icon: "moon" },
+    { word: "India", icon: "flag" },
+    { word: "day one", icon: "axiom" },
+    { word: "scratch", icon: "prompt" },
   ],
 ];
