@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: Params) {
       <header className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end">
         <div>
           <p className="mono-label mb-4">{project.kind}</p>
-          <h1 className="text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] [font-stretch:88%]">
+          <h1 className="text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] font-display">
             {project.name}
           </h1>
         </div>
@@ -117,7 +117,7 @@ export default async function ProjectPage({ params }: Params) {
       >
         <span>
           <span className="mono-label block">Next project</span>
-          <span className="mt-2 block text-[length:var(--step-3)] leading-tight font-medium tracking-[-0.03em] transition-colors group-hover:text-cobalt-bright">
+          <span className="mt-2 block font-display text-[length:var(--step-3)] leading-tight font-medium tracking-[-0.03em] transition-colors group-hover:text-cobalt-bright">
             {next.name}
           </span>
         </span>

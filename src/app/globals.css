@@ -12,8 +12,9 @@
   --color-lime: var(--lime);
   --color-paper: var(--paper);
   --color-mute: var(--mute);
-  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-sans: var(--ff-text), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--ff-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--ff-mono), ui-monospace, monospace;
   --ease-out: var(--ease-out);
   --ease-squish: var(--ease-squish);
 }
@@ -29,7 +30,7 @@
 
   body {
     min-height: 100dvh;
-    font-family: var(--font-sans);
+    font-family: var(--ff-text), ui-sans-serif, system-ui, sans-serif;
     font-size: var(--step-1);
     line-height: 1.55;
     font-optical-sizing: auto;
@@ -63,7 +64,7 @@
   }
 
   .mono-label {
-    font-family: var(--font-mono);
+    font-family: var(--ff-mono), ui-monospace, monospace;
     font-size: var(--step-mono);
     line-height: 1.4;
     letter-spacing: var(--tracking-mono);

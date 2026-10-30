@@ -251,7 +251,7 @@ export function WorksRing({ projects }: { projects: Project[] }) {
       onMouseLeave={() => setActive(null)}
     >
       <div className="pointer-events-none absolute top-1/2 left-1/2 z-[300] -translate-x-1/2 -translate-y-1/2 text-center">
-        <p className="text-[clamp(1.75rem,1rem+1.6vw,2.75rem)] font-medium tracking-[-0.03em] whitespace-nowrap [font-stretch:88%]">
+        <p className="text-[clamp(1.75rem,1rem+1.6vw,2.75rem)] font-medium tracking-[-0.03em] whitespace-nowrap font-display">
           <RollingLabel text={label} />
         </p>
         <p className="mono-label mt-2 tabular-nums" aria-hidden="true">

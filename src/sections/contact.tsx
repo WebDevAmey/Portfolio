@@ -17,7 +17,7 @@ export function Contact() {
         <p className="mono-label mb-4">03 · Contact</p>
         <h2
           id="contact-title"
-          className="max-w-[14ch] text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] text-balance [font-stretch:88%]"
+          className="max-w-[14ch] text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] text-balance font-display"
         >
           Have something worth building?
         </h2>

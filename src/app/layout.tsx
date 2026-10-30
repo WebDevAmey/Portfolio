@@ -6,7 +6,7 @@ import { CursorDot } from "@/components/cursor-dot";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { site } from "@/data/site";
-import { display, mono } from "./fonts";
+import { display, mono, text } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -48,7 +48,7 @@ const onVercel = Boolean(process.env.VERCEL);
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${text.variable} ${mono.variable}`}>
       <body>
         <a
           href="#main"

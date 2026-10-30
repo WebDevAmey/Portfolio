@@ -1,5 +1,5 @@
 import { WorksBento } from "@/components/works-bento";
-import { WorksRing } from "@/components/works-ring";
+import { WorksStage } from "@/components/works-stage";
 import { projects } from "@/data/projects";
 
 export function Works() {
@@ -14,7 +14,7 @@ export function Works() {
           <p className="mono-label mb-4">01 · Selected work</p>
           <h2
             id="work-title"
-            className="max-w-[16ch] text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em] [font-stretch:90%]"
+            className="max-w-[16ch] text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em] font-display"
           >
             Things I&apos;ve designed, built and shipped.
           </h2>
@@ -26,9 +26,7 @@ export function Works() {
       </div>
 
       {/* Ring on wide screens with a fine pointer; bento everywhere else. */}
-      <div className="hidden lg:pointer-fine:block">
-        <WorksRing projects={projects} />
-      </div>
+      <WorksStage projects={projects} />
       <div className="pb-[var(--section-y)] lg:pointer-fine:hidden">
         <WorksBento projects={projects} />
       </div>

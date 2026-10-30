@@ -28,7 +28,7 @@ export function WorksBento({ projects }: { projects: Project[] }) {
               />
               <div className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
                 <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="text-[length:var(--step-2)] leading-tight font-medium tracking-[-0.02em]">
+                  <h3 className="text-[length:var(--step-2)] leading-tight font-medium tracking-[-0.02em] font-display">
                     {project.name}
                   </h3>
                   <span className="mono-label">{project.kind}</span>
