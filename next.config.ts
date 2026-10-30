@@ -1,27 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    viewTransition: true,
+  },
   images: {
-    deviceSizes: [360, 414, 640, 768, 1024, 1280],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 2678400,
-    qualities: [60, 70, 75, 90, 100],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "github.com",
-        port: "",
-        pathname: "/webdevamey.png",
-        search: "",
-      },
-      {
-        protocol: "https",
-        hostname: "unavatar.io",
-        port: "",
-        pathname: "/twitter/**",
-        search: "",
-      },
-    ],
+    formats: ["image/avif", "image/webp"],
+  },
+  async redirects() {
+    return [
+      { source: "/projects", destination: "/#work", permanent: true },
+      { source: "/contact", destination: "/#contact", permanent: true },
+      { source: "/experience", destination: "/#about", permanent: true },
+      { source: "/pull-requests", destination: "/", permanent: true },
+      { source: "/highlights", destination: "/", permanent: true },
+      { source: "/blogs/:slug*", destination: "/", permanent: true },
+    ];
   },
 };
 
