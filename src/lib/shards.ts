@@ -21,7 +21,7 @@ export function burstShards(rect: DOMRect): Promise<void> {
   const animations: Animation[] = [];
 
   for (let i = 0; i < SHARD_COUNT; i++) {
-    const size = 8 + Math.random() * 12;
+    const size = 10 + Math.random() * 14;
     const shard = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     shard.setAttribute("viewBox", "0 0 24 24");
     shard.setAttribute("width", String(size));
@@ -29,7 +29,7 @@ export function burstShards(rect: DOMRect): Promise<void> {
     shard.style.cssText = `position:absolute;left:${cx - size / 2}px;top:${cy - size / 2}px;filter:drop-shadow(0 6px 4px rgba(0,0,0,.55))`;
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", i % 3 === 0 ? DIAMOND_PATH : MARK_PATH);
-    path.setAttribute("fill", COLORS[i % COLORS.length]);
+    path.style.fill = COLORS[i % COLORS.length];
     shard.appendChild(path);
     layer.appendChild(shard);
 
