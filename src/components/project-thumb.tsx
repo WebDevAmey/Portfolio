@@ -19,15 +19,15 @@ function GeneratedArt({ project, showName }: { project: Project; showName: boole
     <div
       role="img"
       aria-label={`${project.name} cover`}
-      className="relative size-full overflow-hidden bg-ink-2"
+      className="relative size-full overflow-hidden bg-chip"
       style={{
-        backgroundImage: `radial-gradient(120% 90% at ${art.glowX}% ${art.glowY}%, color-mix(in srgb, var(--cobalt) 70%, transparent), transparent 62%), repeating-linear-gradient(${art.angle}deg, var(--line) 0 1px, transparent 1px 22px)`,
+        backgroundImage: `radial-gradient(120% 90% at ${art.glowX}% ${art.glowY}%, #ffffff, transparent 65%), repeating-linear-gradient(${art.angle}deg, var(--line) 0 1px, transparent 1px 22px)`,
       }}
     >
       <svg
         viewBox="0 0 100 62.5"
         preserveAspectRatio="xMidYMid slice"
-        className="absolute inset-0 size-full text-paper/25"
+        className="absolute inset-0 size-full text-fg/30"
         aria-hidden="true"
       >
         {art.mark === 0 && (
@@ -53,10 +53,10 @@ function GeneratedArt({ project, showName }: { project: Project; showName: boole
             transform="rotate(45 50 31)"
           />
         )}
-        <circle cx={art.sparkX} cy={art.sparkY * 0.625} r="1.1" fill="var(--lime)" />
+        <circle cx={art.sparkX} cy={art.sparkY * 0.625} r="1.1" fill="var(--fg)" />
       </svg>
       {showName && (
-        <span className="absolute bottom-[8%] left-[7%] font-display text-[clamp(1rem,4cqw+0.4rem,2.75rem)] font-semibold tracking-[-0.03em] text-paper">
+        <span className="absolute bottom-[8%] left-[7%] text-[clamp(1rem,4cqw+0.4rem,2.75rem)] font-semibold tracking-[-0.03em] text-fg">
           {project.name}
         </span>
       )}

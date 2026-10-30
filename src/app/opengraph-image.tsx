@@ -17,10 +17,8 @@ export default function OpengraphImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 72,
-        background: "#0a0a0b",
-        backgroundImage:
-          "radial-gradient(circle at 85% 110%, rgba(0,71,255,0.55), transparent 55%)",
-        color: "#f4f4f0",
+        background: "#f7f7f5",
+        color: "#111111",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -29,14 +27,14 @@ export default function OpengraphImage() {
             width: 64,
             height: 64,
             borderRadius: 14,
-            background: "#0047ff",
+            background: "#111111",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
           <svg width="34" height="34" viewBox="0 0 24 24">
-            <path d={MARK_PATH} fill="#f4f4f0" />
+            <path d={MARK_PATH} fill="#f7f7f5" />
           </svg>
         </div>
         <div
@@ -45,10 +43,10 @@ export default function OpengraphImage() {
             alignItems: "center",
             gap: 12,
             fontSize: 24,
-            color: "rgba(244,244,240,0.7)",
+            color: "#666666",
           }}
         >
-          <div style={{ width: 12, height: 12, borderRadius: 6, background: "#c6ff1a" }} />
+          <div style={{ width: 12, height: 12, borderRadius: 6, background: "#111111" }} />
           {site.status} · {site.statusDetail}
         </div>
       </div>
@@ -56,7 +54,7 @@ export default function OpengraphImage() {
         <div style={{ fontSize: 96, fontWeight: 600, letterSpacing: -4, lineHeight: 1 }}>
           {site.name}
         </div>
-        <div style={{ fontSize: 36, color: "rgba(244,244,240,0.7)" }}>
+        <div style={{ fontSize: 36, color: "#666666" }}>
           Builds products for founders. MIT-WPU, Pune.
         </div>
       </div>

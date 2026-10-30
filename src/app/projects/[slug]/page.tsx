@@ -40,39 +40,35 @@ export default async function ProjectPage({ params }: Params) {
   ].filter(Boolean) as { label: string; href: string }[];
 
   return (
-    <article className="shell py-12 sm:py-20">
+    <article className="column-wide pt-10 pb-[var(--section-y)] sm:pt-16">
       <Link
         href="/#work"
-        className="mono-label inline-flex min-h-11 items-center gap-2 transition-colors hover:text-paper"
+        className="mono-label inline-flex min-h-11 items-center gap-2 transition-colors hover:text-fg"
       >
         <Icon name="arrowRight" className="rotate-180" />
         All work
       </Link>
 
-      <header className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end">
+      <header className="mx-auto mt-8 max-w-[var(--measure)]">
         <div>
-          <p className="mono-label mb-4">{project.kind}</p>
-          <h1 className="font-display text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em]">
+          <p className="mono-label mb-3">{project.kind}</p>
+          <h1 className="text-[length:var(--step-display)] leading-[1.1] font-semibold tracking-[-0.03em]">
             {project.name}
           </h1>
         </div>
-        <p className="max-w-[40ch] text-[length:var(--step-2)] leading-[1.35] text-paper/90">
-          {project.summary}
-        </p>
+        <p className="mt-4 text-[length:var(--step-1)] text-mute">{project.summary}</p>
       </header>
 
       <ProjectThumb
         project={project}
-        sizes="(min-width: 1312px) 1232px, 100vw"
+        sizes="(min-width: 1040px) 960px, 100vw"
         priority
-        className="mt-12 aspect-[16/10] w-full rounded-[var(--radius-card)] border border-line"
+        className="mt-10 aspect-[16/10] w-full rounded-[var(--radius-card)] border border-line bg-surface"
       />
 
-      <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <p className="max-w-[60ch] text-[length:var(--step-1)] leading-[1.7] text-paper/90">
-          {project.description}
-        </p>
-        <dl className="grid content-start gap-0 border-t border-line">
+      <div className="mx-auto mt-12 max-w-[var(--measure)]">
+        <p className="leading-[1.75] text-fg-2">{project.description}</p>
+        <dl className="mt-10 grid border-t border-line sm:grid-cols-2 sm:gap-x-8">
           {project.role && (
             <div className="border-b border-line py-4">
               <dt className="mono-label">Role</dt>
@@ -113,17 +109,17 @@ export default async function ProjectPage({ params }: Params) {
 
       <Link
         href={`/projects/${next.slug}`}
-        className="group mt-24 flex items-end justify-between gap-6 border-t border-line pt-8"
+        className="group mx-auto mt-20 flex max-w-[var(--measure)] items-end justify-between gap-6 border-t border-line pt-8"
       >
         <span>
           <span className="mono-label block">Next project</span>
-          <span className="mt-2 block font-display text-[length:var(--step-3)] leading-tight font-medium tracking-[-0.03em] transition-colors group-hover:text-cobalt-bright">
+          <span className="mt-2 block text-[length:var(--step-2)] leading-tight font-semibold tracking-[-0.02em] underline-offset-4 group-hover:underline">
             {next.name}
           </span>
         </span>
         <Icon
           name="arrowRight"
-          className="mb-3 text-[1.75rem] transition-transform duration-[var(--dur-base)] group-hover:translate-x-1"
+          className="mb-1 text-[1.5rem] transition-transform duration-[var(--dur-base)] group-hover:translate-x-1"
         />
       </Link>
     </article>

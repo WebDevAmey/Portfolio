@@ -4,26 +4,21 @@ import { site } from "@/data/site";
 export function Contact() {
   const mailto = `mailto:${site.email}?subject=${encodeURIComponent("Hello Amey")}`;
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-title"
-      className="relative overflow-hidden border-t border-line py-[var(--section-y)]"
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-1/2 left-1/2 h-[120%] w-[140%] -translate-x-1/2 bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--cobalt)_28%,transparent),transparent)]"
-      />
-      <div className="shell relative">
-        <p className="mono-label mb-4">03 · Contact</p>
+    <section id="contact" aria-labelledby="contact-title" className="column pb-[var(--section-y)]">
+      <div className="rounded-[2rem] border border-line bg-surface px-6 py-12 text-center sm:px-12 sm:py-16">
+        <p className="mono-label mb-3">03 · Contact</p>
         <h2
           id="contact-title"
-          className="max-w-[14ch] font-display text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] text-balance"
+          className="mx-auto max-w-[16ch] text-[length:var(--step-display)] leading-[1.1] font-semibold tracking-[-0.03em] text-balance"
         >
           Have something worth building?
         </h2>
-        <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-6">
+        <p className="mx-auto mt-4 max-w-[36ch] text-mute">
+          I&apos;m open to collaborations. Tell me what you&apos;re working on.
+        </p>
+        <div className="mt-8 flex flex-col items-center gap-4">
           <SquishButton href={mailto}>Get in touch</SquishButton>
-          <p className="text-mute">
+          <p className="text-[length:var(--step-small)] text-mute">
             or write to{" "}
             <a className="link" href={`mailto:${site.email}`}>
               {site.email}

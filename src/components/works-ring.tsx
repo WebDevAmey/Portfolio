@@ -251,7 +251,7 @@ export function WorksRing({ projects }: { projects: Project[] }) {
       onMouseLeave={() => setActive(null)}
     >
       <div className="pointer-events-none absolute top-1/2 left-1/2 z-[300] -translate-x-1/2 -translate-y-1/2 text-center">
-        <p className="font-display text-[clamp(1.75rem,1rem+1.6vw,2.75rem)] font-medium tracking-[-0.03em] whitespace-nowrap">
+        <p className="text-[clamp(1.5rem,1rem+1.2vw,2.25rem)] font-semibold tracking-[-0.03em] whitespace-nowrap">
           <RollingLabel text={label} />
         </p>
         <p className="mono-label mt-2 tabular-nums" aria-hidden="true">
@@ -285,7 +285,6 @@ export function WorksRing({ projects }: { projects: Project[] }) {
                 href={`/projects/${project.slug}`}
                 tabIndex={i === focusIndex ? 0 : -1}
                 draggable={false}
-                data-cursor="view"
                 aria-label={project.name}
                 aria-describedby={isActive ? "works-caption" : undefined}
                 onMouseEnter={() => setActive(i)}
@@ -294,11 +293,11 @@ export function WorksRing({ projects }: { projects: Project[] }) {
                   setFocusIndex(i);
                 }}
                 onBlur={() => setActive(null)}
-                className={`block size-full overflow-hidden rounded-[var(--radius-sm)] ring-1 ring-line transition-[filter,transform,box-shadow] duration-[var(--dur-slow)] ease-out motion-reduce:transition-[filter] ${
+                className={`block size-full overflow-hidden rounded-[var(--radius-sm)] bg-surface ring-1 transition-[filter,transform,box-shadow,opacity] duration-[var(--dur-slow)] ease-out motion-reduce:transition-[filter,opacity] ${
                   isActive
-                    ? "scale-110 shadow-[0_24px_70px_-18px_var(--cobalt)] ring-cobalt-bright"
-                    : "scale-100"
-                } ${isDimmed ? "brightness-[0.35] grayscale" : ""}`}
+                    ? "scale-110 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] ring-fg"
+                    : "scale-100 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.3)] ring-line grayscale"
+                } ${isDimmed ? "opacity-35" : ""}`}
               >
                 <ProjectThumb
                   project={project}
@@ -320,7 +319,7 @@ export function WorksRing({ projects }: { projects: Project[] }) {
       >
         {activeProject && (
           <>
-            <p className="text-[length:var(--step-0)] leading-snug text-paper">
+            <p className="text-[length:var(--step-0)] leading-snug text-fg">
               {activeProject.summary}
             </p>
             <p className="mono-label mt-2">{activeProject.stack.slice(0, 3).join(" · ")}</p>

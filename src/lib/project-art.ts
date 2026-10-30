@@ -1,4 +1,4 @@
-// Deterministic, on-palette cover art for projects that have no screenshot.
+// Deterministic, monochrome cover art for projects that have no screenshot.
 export type ProjectArt = {
   glowX: number;
   glowY: number;
