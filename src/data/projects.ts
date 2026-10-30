@@ -50,7 +50,10 @@ export const projects: Project[] = [
     description:
       "70 text effects for React, installed as source with the shadcn CLI. Every effect has a live preview and a calm preset, and the catalog is readable by AI tools through llms.txt and an MCP server.",
     stack: ["Next.js", "React", "TypeScript", "Motion"],
-    links: { live: "https://typeforge-ten.vercel.app", repo: "https://github.com/WebDevAmey/textdesigns" },
+    links: {
+      live: "https://typeforge-ten.vercel.app",
+      repo: "https://github.com/WebDevAmey/textdesigns",
+    },
     image: shot("textlab", "Textlab homepage with the headline Text, set in motion"),
     featured: true,
   },
@@ -77,8 +80,16 @@ export const projects: Project[] = [
     description:
       "Free, open-source system design guides built around interactive architecture diagrams. Drag, zoom, and trace each edge through real designs like Twitter, WhatsApp, and YouTube, with a written breakdown of every trade-off.",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "React Flow"],
-    links: { live: "https://sdmafia.hdtl.in", repo: "https://github.com/WebDevAmey/system-design-mafia" },
-    image: shot("system-design-mafia", "Interactive architecture diagram of Twitter with services and data stores", 1560, 887),
+    links: {
+      live: "https://sdmafia.hdtl.in",
+      repo: "https://github.com/WebDevAmey/system-design-mafia",
+    },
+    image: shot(
+      "system-design-mafia",
+      "Interactive architecture diagram of Twitter with services and data stores",
+      1560,
+      887,
+    ),
     featured: true,
     credit: "Original project by Atharva Arbat",
   },

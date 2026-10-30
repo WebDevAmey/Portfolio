@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 
 import quotes from "@/data/quotes.json";
-import { getDayOfYear, getQuoteForDate, isLeapYear, msUntilNextMidnight, type Quote } from "@/lib/quotes";
+import {
+  getDayOfYear,
+  getQuoteForDate,
+  isLeapYear,
+  msUntilNextMidnight,
+  type Quote,
+} from "@/lib/quotes";
 
 // Fire slightly after midnight so the new date is unambiguous.
 const MIDNIGHT_SLACK_MS = 250;
@@ -77,7 +83,9 @@ export function DailyQuote() {
             </blockquote>
             <figcaption
               className="quote-word mt-4 font-mono text-[length:var(--step-0)] text-mute"
-              style={{ animationDelay: `${today.quote.text.split(" ").length * WORD_STAGGER_MS}ms` }}
+              style={{
+                animationDelay: `${today.quote.text.split(" ").length * WORD_STAGGER_MS}ms`,
+              }}
             >
               {today.quote.author}
             </figcaption>

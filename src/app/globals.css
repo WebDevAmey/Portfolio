@@ -74,7 +74,9 @@
   .link {
     color: var(--paper);
     background: linear-gradient(var(--cobalt-bright), var(--cobalt-bright)) 0 100% / 0 1px no-repeat;
-    transition: background-size var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+    transition:
+      background-size var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out);
   }
   .link:hover {
     color: var(--cobalt-bright);

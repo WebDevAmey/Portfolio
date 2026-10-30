@@ -2,7 +2,8 @@ export type Quote = { id: number; text: string; author: string };
 
 const MS_PER_DAY = 86_400_000;
 
-export const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+export const isLeapYear = (year: number) =>
+  (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
 /**
  * Day of the year (1-366) for the local calendar date of `date`.
