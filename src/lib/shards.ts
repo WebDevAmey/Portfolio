@@ -3,7 +3,7 @@ import { duration, easing } from "./motion";
 
 const SHARD_COUNT = 28;
 const DIAMOND_PATH = "M12 2 22 12 12 22 2 12Z";
-const COLORS = ["var(--lime)", "var(--cobalt-bright)"];
+const COLORS = ["var(--fg)", "#8a8a8a", "#c4c4c0"];
 const GRAVITY_PX = 60;
 
 /**
@@ -26,7 +26,7 @@ export function burstShards(rect: DOMRect): Promise<void> {
     shard.setAttribute("viewBox", "0 0 24 24");
     shard.setAttribute("width", String(size));
     shard.setAttribute("height", String(size));
-    shard.style.cssText = `position:absolute;left:${cx - size / 2}px;top:${cy - size / 2}px;filter:drop-shadow(0 6px 4px rgba(0,0,0,.55))`;
+    shard.style.cssText = `position:absolute;left:${cx - size / 2}px;top:${cy - size / 2}px;filter:drop-shadow(0 6px 4px rgba(0,0,0,.18))`;
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute("d", i % 3 === 0 ? DIAMOND_PATH : MARK_PATH);
     path.style.fill = COLORS[i % COLORS.length];

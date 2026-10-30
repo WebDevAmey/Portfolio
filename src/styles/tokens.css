@@ -1,39 +1,38 @@
 /* Single source of truth for the visual language. JS mirrors motion values in src/lib/motion.ts. */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Color */
-  --ink: #0a0a0b;
-  --ink-2: #121316;
-  --ink-3: #1a1b1f;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
-  --cobalt: #0047ff;
-  /* Same hue, lifted for AA text and 3:1 focus rings on ink and ink-2. */
-  --cobalt-bright: #4a7aff;
-  --lime: #c6ff1a;
-  --paper: #f4f4f0;
-  --mute: rgba(244, 244, 240, 0.56);
+  /* Color: black on warm white. The pond is the only colour on the page. */
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --chip: #ececea;
+  --fg: #111111;
+  --fg-2: #2a2a2a;
+  /* 5.35:1 on --bg, 4.85:1 on --chip. */
+  --mute: #666666;
+  --line: rgba(17, 17, 17, 0.08);
+  --line-strong: rgba(17, 17, 17, 0.16);
 
   /* Type scale */
-  --step-hero: clamp(2.25rem, 1.3rem + 4.2vw, 5.25rem);
-  --step-3: clamp(1.75rem, 1.2rem + 2.4vw, 3.5rem);
-  --step-2: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --step-display: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --step-2: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
   --step-1: 1.0625rem;
-  --step-0: 0.875rem;
+  --step-0: 0.9375rem;
+  --step-small: 0.8125rem;
   --step-mono: 0.6875rem;
-  --tracking-mono: 0.14em;
+  --tracking-mono: 0.12em;
 
-  /* Space */
-  --gutter: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
-  --section-y: clamp(5rem, 3rem + 9vw, 10rem);
-  --content-max: 82rem;
-  --header-h: 3.5rem;
+  /* Layout: one centred column; the pond and the works stage are allowed to be wider. */
+  --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
+  --measure: 40rem;
+  --wide: 60rem;
+  --section-y: clamp(4.5rem, 3rem + 6vw, 8rem);
+  --nav-h: 3rem;
 
   /* Radius */
   --radius-pill: 999px;
-  --radius-card: 14px;
-  --radius-sm: 8px;
+  --radius-card: 1.25rem;
+  --radius-sm: 0.625rem;
 
   /* Motion */
   --dur-fast: 140ms;

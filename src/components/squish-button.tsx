@@ -50,9 +50,9 @@ export function SquishButton({ href, children }: SquishButtonProps) {
     <a
       href={href}
       onClick={onClick}
-      className="group relative inline-flex min-h-16 touch-manipulation items-center gap-3 rounded-full bg-ink-3 [background-image:radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:4px_4px] py-4 pr-8 pl-5 text-[length:var(--step-1)] font-medium tracking-[-0.01em] text-paper shadow-[inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-2px_6px_rgba(0,0,0,0.6),0_1px_0_rgba(0,0,0,0.8),0_14px_30px_-10px_rgba(0,0,0,0.9),0_0_0_1px_var(--line-strong)] transition-[transform,box-shadow] duration-[var(--dur-fast)] ease-squish hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-2px_6px_rgba(0,0,0,0.6),0_1px_0_rgba(0,0,0,0.8),0_22px_40px_-12px_var(--cobalt),0_0_0_1px_var(--cobalt-bright)] active:translate-y-0 active:scale-x-[1.04] active:scale-y-[0.9] motion-reduce:active:scale-100"
+      className="group relative inline-flex min-h-14 touch-manipulation items-center gap-3 rounded-full bg-fg [background-image:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:4px_4px] py-3 pr-7 pl-3 text-[length:var(--step-1)] font-medium tracking-[-0.01em] text-bg shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-2px_6px_rgba(0,0,0,0.5),0_1px_0_rgba(0,0,0,0.6),0_12px_24px_-10px_rgba(0,0,0,0.55)] transition-[transform,box-shadow] duration-[var(--dur-fast)] ease-squish hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),inset_0_-2px_6px_rgba(0,0,0,0.5),0_1px_0_rgba(0,0,0,0.6),0_20px_36px_-12px_rgba(0,0,0,0.6)] active:translate-y-0 active:scale-x-[1.04] active:scale-y-[0.9] motion-reduce:active:scale-100"
     >
-      <span className="grid size-8 place-items-center rounded-full bg-cobalt text-[13px] text-paper transition-transform duration-[var(--dur-base)] ease-squish group-hover:rotate-12">
+      <span className="grid size-8 place-items-center rounded-full bg-bg text-[13px] text-fg transition-transform duration-[var(--dur-base)] ease-squish group-hover:rotate-12">
         <Mark />
       </span>
       {children}

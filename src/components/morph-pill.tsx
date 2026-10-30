@@ -71,10 +71,10 @@ export function MorphPill({ words, index, reduced, onPointerEnter }: MorphPillPr
 
   return (
     <span
-      className="group/pill mx-[0.04em] inline-flex translate-y-[-0.05em] items-center gap-[0.18em] rounded-[0.3em] border border-line bg-ink-2 py-[0.02em] pr-[0.22em] pl-[0.09em] align-middle leading-[1.05] transition-colors duration-[var(--dur-base)] hover:border-line-strong"
+      className="group/pill mx-[0.06em] inline-flex translate-y-[-0.05em] items-center gap-[0.2em] rounded-[0.3em] bg-chip py-[0.04em] pr-[0.24em] pl-[0.1em] align-middle leading-[1.1] transition-colors duration-[var(--dur-base)] hover:bg-[#e2e2df]"
       onPointerEnter={onPointerEnter}
     >
-      <span className="grid size-[0.86em] shrink-0 place-items-center overflow-hidden rounded-[0.2em] bg-cobalt text-[0.56em] text-paper">
+      <span className="grid size-[0.9em] shrink-0 place-items-center overflow-hidden rounded-[0.22em] bg-fg text-[0.56em] text-bg">
         {words.map((w, i) => (
           <span
             key={w.word}
