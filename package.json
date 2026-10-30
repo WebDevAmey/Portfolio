@@ -8,9 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run && npm run test:tz",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:tz": "TZ=America/New_York vitest run src/lib && TZ=Europe/London vitest run src/lib && TZ=Asia/Kolkata vitest run src/lib"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
