@@ -1,38 +1,79 @@
-import { site } from "@/data/site";
+import { nav, site } from "@/data/site";
 import { DailyQuote } from "./daily-quote";
 import { Icon } from "./icons";
+import { LocalTime } from "./local-time";
+
+const linkClass =
+  "inline-flex min-h-9 items-center gap-1.5 text-[length:var(--step-small)] text-fg-2 transition-colors hover:text-fg hover:underline hover:underline-offset-4";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line">
-      <div className="shell grid gap-16 py-16 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] md:py-24">
+    <footer className="border-t border-line bg-surface">
+      <div className="column pt-14 sm:pt-20">
         <DailyQuote />
-        <div className="flex flex-col justify-between gap-12">
-          <ul className="grid gap-1" aria-label="Elsewhere">
-            {site.socials.map((s) => (
-              <li key={s.label}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener me"
-                  className="group flex min-h-11 items-center justify-between gap-4 border-b border-line py-2 transition-colors hover:border-cobalt-bright"
-                >
-                  <span>{s.label}</span>
-                  <span className="flex items-center gap-2 font-mono text-[length:var(--step-0)] text-mute transition-colors group-hover:text-paper">
-                    {s.handle}
-                    <Icon name="arrow" />
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p className="mono-label leading-relaxed">
+
+        <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-line pt-10 sm:grid-cols-3">
+          <nav aria-label="Footer">
+            <h2 className="mono-label mb-3">Navigate</h2>
+            <ul>
+              {nav.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    {...("external" in item ? { target: "_blank", rel: "noopener" } : {})}
+                    className={linkClass}
+                  >
+                    {item.label}
+                    {"external" in item && <Icon name="arrow" className="text-[0.85em]" />}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div>
+            <h2 className="mono-label mb-3">Elsewhere</h2>
+            <ul>
+              {site.socials.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener me" className={linkClass}>
+                    {s.label}
+                    <Icon name="arrow" className="text-[0.85em]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-span-2 sm:col-span-1">
+            <h2 className="mono-label mb-3">Contact</h2>
+            <a href={`mailto:${site.email}`} className={`${linkClass} break-all`}>
+              {site.email}
+            </a>
+            <p className="mt-2 text-[length:var(--step-small)] text-mute">
+              {site.location} · <LocalTime /> IST
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line py-6">
+          <p className="mono-label">
             © {new Date().getFullYear()} {site.name}
-            <br />
-            Designed and built in {site.location}
           </p>
+          <a
+            href="#top"
+            className="mono-label inline-flex min-h-11 items-center gap-1.5 hover:text-fg"
+          >
+            Back to top
+            <Icon name="arrow" className="-rotate-45" />
+          </a>
         </div>
       </div>
+
+      <p
+        aria-hidden="true"
+        className="column-wide overflow-hidden text-center text-[clamp(3rem,14vw,8.5rem)] leading-[0.8] font-semibold tracking-[-0.05em] whitespace-nowrap text-fg/[0.06] select-none"
+      >
+        {site.name}
+      </p>
     </footer>
   );
 }

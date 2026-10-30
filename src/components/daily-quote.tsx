@@ -56,18 +56,18 @@ export function DailyQuote() {
   }, []);
 
   return (
-    <figure className="flex flex-col gap-6" aria-labelledby="quote-label">
+    <figure className="flex flex-col gap-5" aria-labelledby="quote-label">
       <p id="quote-label" className="mono-label flex items-center gap-3">
-        <span className="size-1.5 rounded-full bg-lime" aria-hidden="true" />
+        <span className="size-1.5 rounded-full bg-fg" aria-hidden="true" />
         Line of the day
         <span className="tabular-nums" aria-hidden={!today}>
           {today ? `${String(today.day).padStart(3, "0")} / ${today.daysInYear}` : " "}
         </span>
       </p>
-      <div className="min-h-[calc(5lh+2.5rem)] text-[length:var(--step-2)] leading-[1.3] sm:min-h-[calc(4lh+2.5rem)]">
+      <div className="min-h-[calc(5lh+2.25rem)] text-[length:var(--step-2)] leading-[1.35] sm:min-h-[calc(3lh+2.25rem)]">
         {today && (
           <div key={today.quote.id} aria-live="polite">
-            <blockquote className="max-w-[40ch] font-medium tracking-[-0.015em] text-balance">
+            <blockquote className="font-medium tracking-[-0.015em] text-balance">
               <p>
                 {today.quote.text.split(" ").map((word, i) => (
                   <span
@@ -82,7 +82,7 @@ export function DailyQuote() {
               </p>
             </blockquote>
             <figcaption
-              className="quote-word mt-4 font-mono text-[length:var(--step-0)] text-mute"
+              className="quote-word mt-4 font-mono text-[length:var(--step-small)] text-mute"
               style={{
                 animationDelay: `${today.quote.text.split(" ").length * WORD_STAGGER_MS}ms`,
               }}
