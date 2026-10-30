@@ -1,133 +1,68 @@
-# Amey Tarmale — Portfolio
+# ameytarmale.site
 
-Personal portfolio of [Amey Tarmale](https://github.com/WebDevAmey), a full-stack web developer building component libraries, AI agents, and full-stack products.
+Personal site of Amey Tarmale: CS student at MIT-WPU Pune, founder and developer of [OVRT](https://ovrt.in).
 
-Built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **TypeScript**, on top of the open-source [Portfolio-v2](https://github.com/Ashutoshx7/Portfolio-v2-) template by Ashutosh Singh.
+Next.js 16 (App Router), React 19, TypeScript and Tailwind CSS v4. No animation libraries: motion is CSS, the Web Animations API and View Transitions. See [`SPEC.md`](SPEC.md) for the design and interaction spec and [`IMPLEMENTATION.md`](IMPLEMENTATION.md) for the build plan.
 
----
+## Setup
 
-## Tech Stack
-
-- **Framework:** [Next.js](https://nextjs.org/) 16 (App Router)
-- **Library:** [React](https://react.dev/) 19
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) v4
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Animation:** [Framer Motion](https://www.framer.com/motion/), [GSAP](https://greensock.com/gsap/)
-- **UI Components:** [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
-- **Icons:** [Lucide React](https://lucide.dev/), [React Icons](https://react-icons.github.io/react-icons/)
-- **Deployment:** [Vercel](https://vercel.com/) with Analytics & Speed Insights
-
----
-
-## Features
-
-- Responsive, grid-based layout with blueprint-style micro-details
-- Dark and light mode with system preference detection
-- Command palette (`Cmd/Ctrl + K`) for quick navigation
-- Interactive GitHub contribution graph
-- Project showcase with detail pages
-- Experience timeline
-- Open-source contributions section
-- Skills and technologies grid
-- Blog listing
-- Contact page
-- Sound-engineered micro-interactions
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) 20 or later
-- npm / yarn / pnpm / bun
-
-### Install dependencies
+Requires Node 20 or later.
 
 ```bash
 npm install
+npm run dev        # http://localhost:3000
 ```
 
-### Run the development server
+## Scripts
 
-```bash
-npm run dev
-```
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build (all pages are static) |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm test` | Vitest, then the quote tests again under three time zones |
+| `npm run format` | Prettier |
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build for production
-
-```bash
-npm run build
-```
-
-### Start the production server
-
-```bash
-npm start
-```
-
-### Lint
-
-```bash
-npm run lint
-```
-
----
-
-## Project Structure
+## Structure
 
 ```text
-Portfolio
-├── src/
-│   ├── app/                 # Next.js App Router pages
-│   ├── components/          # React components & UI primitives
-│   ├── data/                # Projects, experience, blogs, highlights
-│   ├── hooks/               # Custom React hooks
-│   └── lib/                 # Utility functions and sound engine
-├── public/                  # Static assets
-├── next.config.ts           # Next.js configuration
-├── tsconfig.json            # TypeScript configuration
-└── package.json
+src/
+  app/            layout, home page, case studies, sitemap, robots, OG image, fonts
+  sections/       hero, works, about, contact
+  components/     header, footer, morph pill, works ring and bento, cursor, CTA, daily quote, icons
+  data/           site.ts (bio, links, hero words), projects.ts, quotes.json
+  lib/            quote logic, motion tokens for JS, shard burst, helpers
+  styles/         tokens.css (colors, type scale, spacing, radii, durations, easings)
 ```
 
-## Editing content
+Design tokens live in `src/styles/tokens.css`. JS animations read the same durations and easings from `src/lib/motion.ts`.
 
-| What | Where |
-| --- | --- |
-| Name, bio, socials, skills | `src/app/page.tsx` |
-| Social hover cards | `src/components/pixel-perfect/social-hover-card.tsx` |
-| Projects | `src/data/projectsData.ts` |
-| Experience list and timeline | `src/data/experienceData.ts`, `src/components/ExperienceTimeline.tsx` |
-| Blog posts | `src/data/blogsData.ts` (section hidden while empty) |
-| Highlights | `src/data/highlightsData.ts` (section hidden while empty) |
-| Site metadata | `src/app/layout.tsx` |
+## Add a project
 
-Search the code for `TODO(Amey)` to find the spots that still need personal details.
+1. Add an entry to `projects` in `src/data/projects.ts`. The type explains each field.
+2. Optional screenshot: put a 16:10 `.webp` (about 1440x900) in `public/project-image/` and set `image: shot("file-name", "alt text")`. Without one, the card gets generated cobalt/lime cover art.
+3. Set `featured: true` to show it in the bento grid on small screens; everything else appears in the "More work" list. The desktop ring shows all projects.
 
-## Environment variables
+A case study page is generated at `/projects/<slug>` automatically.
 
-| Name | Purpose |
-| --- | --- |
-| `GITHUB_TOKEN` | GitHub token used by `/api/github` for the contribution graph and pull-request list. A token with no scopes (public data only) is enough. |
-| `NEXT_PUBLIC_SITE_URL` | Your production URL, used for Open Graph links. Falls back to the Vercel production URL. |
+## Edit the daily quote
 
-The contact form posts to [FormSubmit](https://formsubmit.co/); the first submission sends an activation email to `ameytarmale7@gmail.com`.
+`src/data/quotes.json` holds 366 entries, `{ id, text, author }`. The quote for a visitor is the one whose `id` equals their local day of the year; `id` 366 only shows on 31 December of leap years.
 
----
+- Keep exactly 366 entries with ids 1 to 366, no duplicate text, and each quote at 160 characters or fewer. `npm test` checks all of this.
+- Only add quotes whose attribution you can verify. If you are unsure, use `"Unknown"`.
 
-## Deployment
+## Edit copy
 
-This site is optimized for deployment on [Vercel](https://vercel.com/). Connect your GitHub repository to Vercel and deploy with zero configuration.
+- Bio, links, status badge, hero words: `src/data/site.ts`
+- Resume: drop a PDF in `public/resume.pdf` and set `resumeUrl: "/resume.pdf"` in `src/data/site.ts`.
 
-For other platforms, use the static or Node.js output mode configured in `next.config.ts`.
+## Fonts
 
----
+Bricolage Grotesque and JetBrains Mono (both SIL OFL 1.1) are self-hosted from `src/app/fonts/` as Latin subsets. Bricolage is shipped as two small static instances cut from the variable font: a display cut (88% width, medium) for headings and a text cut for everything else.
 
-## Connect
+## Deploy
 
-- **GitHub:** [WebDevAmey](https://github.com/WebDevAmey)
-- **Twitter / X:** [@ameytwtcorp](https://x.com/ameytwtcorp)
-- **LinkedIn:** [Amey Tarmale](https://www.linkedin.com/in/amey-tarmale-64b499241)
-- **Email:** [ameytarmale7@gmail.com](mailto:ameytarmale7@gmail.com)
+Vercel builds every push. Analytics and Speed Insights only render when `VERCEL` is set. Set `NEXT_PUBLIC_SITE_URL` if the domain changes (defaults to `https://www.ameytarmale.site`).

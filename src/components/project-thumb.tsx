@@ -56,7 +56,7 @@ function GeneratedArt({ project, showName }: { project: Project; showName: boole
         <circle cx={art.sparkX} cy={art.sparkY * 0.625} r="1.1" fill="var(--lime)" />
       </svg>
       {showName && (
-        <span className="absolute bottom-[8%] left-[7%] text-[clamp(1rem,4cqw+0.4rem,2.75rem)] font-semibold tracking-[-0.03em] text-paper font-display">
+        <span className="absolute bottom-[8%] left-[7%] font-display text-[clamp(1rem,4cqw+0.4rem,2.75rem)] font-semibold tracking-[-0.03em] text-paper">
           {project.name}
         </span>
       )}

@@ -52,7 +52,7 @@ export default async function ProjectPage({ params }: Params) {
       <header className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end">
         <div>
           <p className="mono-label mb-4">{project.kind}</p>
-          <h1 className="text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em] font-display">
+          <h1 className="font-display text-[length:var(--step-hero)] leading-[1.02] font-medium tracking-[-0.04em]">
             {project.name}
           </h1>
         </div>

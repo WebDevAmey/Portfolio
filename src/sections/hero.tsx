@@ -76,7 +76,7 @@ export function Hero() {
 
       <h1
         id="hero-title"
-        className="mt-10 max-w-[23ch] text-[length:var(--step-hero)] leading-[1.12] font-medium tracking-[-0.035em] text-balance font-display sm:mt-14"
+        className="mt-10 max-w-[23ch] font-display text-[length:var(--step-hero)] leading-[1.12] font-medium tracking-[-0.035em] text-balance sm:mt-14"
       >
         <span className="sr-only">{sentence(heroSlots.map((s) => s[0].word))}</span>
         <span aria-hidden="true">

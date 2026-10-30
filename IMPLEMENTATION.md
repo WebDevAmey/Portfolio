@@ -4,50 +4,50 @@ Companion to `SPEC.md`. Each step is one or two commits on `revamp/v2`. Run `npm
 
 ## Steps
 
-- [ ] **0. Guardrails**
+- [x] **0. Guardrails**
   - `.claude/settings.json` with `includeCoAuthoredBy: false` and empty `attribution.commit` / `attribution.pr`.
   - Confirm `git config user.name` / `user.email` match the existing history.
   - `docs: add revamp spec and implementation plan`
-- [ ] **1. Tooling**
+- [x] **1. Tooling**
   - Add Prettier, Vitest; scripts `dev`, `build`, `start`, `lint`, `typecheck`, `test`, `format`.
   - `chore: add prettier, vitest and typecheck scripts`
-- [ ] **2. Strip the template**
+- [x] **2. Strip the template**
   - Delete old routes (`projects` index, `experience`, `contact`, `pull-requests`, `highlights`, `blogs`, `api/github`), old components, hooks, sound engine, unused images and sounds.
   - Remove dependencies: three, gsap, framer-motion, cmdk, radix, next-themes, react-icons, lucide-react, shadcn, class-variance-authority, tailwind-merge, tw-animate-css.
   - Add permanent redirects in `next.config.ts`; enable `experimental.viewTransition`.
   - `refactor: remove template routes, components and dependencies`
-- [ ] **3. Tokens and base styles**
+- [x] **3. Tokens and base styles**
   - `src/styles/tokens.css` (color, type, space, radius, motion), `src/app/globals.css` (Tailwind import, `@theme inline` mapping, base, focus, selection, reduced-motion reset).
   - Fonts in `src/app/fonts.ts` (Bricolage Grotesque, JetBrains Mono).
   - `src/lib/motion.ts` (durations and easings for JS).
   - `feat: add design tokens, fonts and base styles`
-- [ ] **4. Data**
+- [x] **4. Data**
   - `src/data/site.ts`, `src/data/projects.ts` (typed, OVRT added), `src/lib/project-art.ts` for placeholder gradients.
   - `feat: add typed site and project data`
-- [ ] **5. Layout shell**
+- [x] **5. Layout shell**
   - `src/app/layout.tsx` (metadata, OG/Twitter, viewport, analytics only on Vercel), `components/site-header.tsx`, `components/site-footer.tsx`, `app/sitemap.ts`, `app/robots.ts`, `app/opengraph-image.tsx`.
   - `feat: add header, footer and metadata routes`
-- [ ] **6. Hero**
+- [x] **6. Hero**
   - `components/icons.tsx`, `components/status-badge.tsx`, `components/morph-pill.tsx`, `sections/hero.tsx`, `lib/use-reduced-motion.ts`.
   - `feat(hero): add morphing pill sentence and status badge`
-- [ ] **7. Works**
+- [x] **7. Works**
   - `components/project-thumb.tsx`, `components/works-ring.tsx` (port of existing ring + keyboard, caption, hint), `components/works-bento.tsx`, `components/cursor-dot.tsx`, `sections/works.tsx`.
   - `feat(works): add spotlight ring with keyboard control`
   - `feat(works): add bento grid and index list for small screens`
   - `feat(works): add magnetic lime cursor`
-- [ ] **8. Case study**
+- [x] **8. Case study**
   - `app/projects/[slug]/page.tsx` with `generateStaticParams`, `generateMetadata`, shared `ViewTransition` thumbnail, next-project link.
   - `feat: add case study pages with view transition`
-- [ ] **9. About and contact**
+- [x] **9. About and contact**
   - `sections/about.tsx`, `sections/contact.tsx`, `components/squish-button.tsx`, `lib/shards.ts`.
   - `feat(about): add about summary`, `feat(contact): add squishy cta with shard burst`
-- [ ] **10. Daily quote**
+- [x] **10. Daily quote**
   - `src/lib/quotes.ts` (`getDayOfYear`, `getQuoteForDate`, `msUntilNextMidnight`), `src/data/quotes.json`, `components/daily-quote.tsx`, `src/lib/quotes.test.ts`.
   - `feat(quote): add deterministic daily quote`, `test(quote): cover data and day-of-year mapping`
-- [ ] **11. Polish and QA**
+- [x] **11. Polish and QA**
   - Contrast pass, lime budget, focus order, Lighthouse, 360/768/1280/1920 screenshots, reduced motion, keyboard only.
   - `perf: …`, `fix: …` as needed.
-- [ ] **12. Docs**
+- [x] **12. Docs**
   - README: setup, scripts, structure, adding a project, editing quotes.
   - `docs: rewrite readme for v2`
 - [ ] **13. Deploy**

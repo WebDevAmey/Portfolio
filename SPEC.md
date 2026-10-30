@@ -75,7 +75,7 @@ Lime budget: dot, cursor, active-word underline, CTA shards, selection highlight
 
 ### Typography
 
-- Display and text: **Bricolage Grotesque** (variable, optical size axis). Characterful, slightly condensed at display sizes, not Inter/Roboto. Self-hosted through `next/font/google` (downloaded at build, served from the site's own origin, `display: swap`, latin subset, preloaded).
+- Display and text: **Bricolage Grotesque**. Characterful, slightly condensed at display sizes, not Inter/Roboto. Self-hosted with `next/font/local`, `display: swap`. To stay inside the performance budget the variable font is cut into two Latin-subset instances: a display cut (88% width, weight 500, optical sizes 12-96, ~21 KB, preloaded) for headings, and a text cut (100% width, weights 400-600, ~21 KB) for everything else.
 - Utility: **JetBrains Mono** for labels, hints, metadata, uppercase with wide tracking.
 
 Fluid scale (`clamp`, 360 → 1440px):
@@ -138,7 +138,7 @@ Copy (original, first person): "I build **[products]** for **[founders]**, sweat
 Desktop (≥ 1024px and fine pointer):
 
 - Projects sit on an ellipse around a centered label that reads `WORKS (15)`. Ring drifts at 0.05 rad/s, gets momentum from scroll and drag (kept from the existing ring), slows to 20% while a card is active.
-- Spotlight: the active card scales 1.1 and stays vivid; others go `grayscale(1) brightness(.35)` over `--dur-base`. The center label rolls letter by letter to the project name. A caption (year, stack, one-line summary) fades in bottom-right. A mono hint sits bottom-left: `HOVER · ← → TO CYCLE · ENTER TO OPEN`.
+- Spotlight: the active card scales 1.1 and stays vivid; others go `grayscale(1) brightness(.35)` over `--dur-base`. The center label rolls letter by letter to the project name. A caption (one-line summary and stack) fades in bottom-right. A mono hint sits bottom-left: `HOVER · ← → TO CYCLE · ENTER TO OPEN`.
 - Keyboard: the ring is one tab stop (roving `tabindex`). Arrow keys move focus to the next/previous project, Home/End jump, Enter follows the link. The focused card gets the cobalt-bright ring.
 - Innovation A, magnetic lime cursor: on fine pointers a lime dot trails the pointer with a spring; over a card it grows into a 64px outlined ring labelled `VIEW` and is pulled 30% toward the card center. Hidden for coarse pointers and reduced motion; the native cursor is never hidden.
 - Innovation B, expand to case study: clicking a card navigates to `/projects/[slug]`; the thumbnail morphs into the case-study hero using React `<ViewTransition name="thumb-{slug}">` with a 400ms blur-softened morph. Browsers without the API just navigate.
@@ -176,10 +176,10 @@ Four first-person sentences (draft, **needs Amey's review**) plus a mono fact li
 type Project = {
   slug: string;
   name: string;
-  year: number;
   summary: string;        // one line, ≤ 90 chars, used in ring caption and bento
   description: string;    // full paragraph for the case study
-  role: string;
+  kind: "Product" | "Library" | "Agent" | "Tool" | "Systems";
+  role?: string;
   stack: string[];
   links: { live?: string; repo?: string };
   image?: { src: string; width: number; height: number; alt: string };
@@ -212,15 +212,15 @@ type Quote = { id: number; text: string; author: string };
 
 ## 10. Acceptance criteria
 
-- [ ] Palette strictly ink/cobalt/lime + paper/mute; lime under ~5% of any viewport.
-- [ ] Hero pills morph on hover, focus and interval with no layout shift; pause toggle works; reduced motion crossfades.
-- [ ] Ring: hover and keyboard spotlight, center label swap, caption, arrows/Home/End/Enter; bento on < 1024px.
-- [ ] Cursor and View Transition expand work and degrade gracefully.
-- [ ] CTA squishes and bursts, then opens mail; works with JS off, reduced motion and modified clicks.
-- [ ] 366 unique quotes, deterministic by local day, live midnight swap, tests pass.
-- [ ] `npm run lint`, `typecheck`, `test`, `build` all pass.
-- [ ] Lighthouse mobile ≥ 95 ×4. Checked at 360, 768, 1280, 1920.
-- [ ] Zero `Co-Authored-By` or AI mentions in any commit.
+- [x] Palette strictly ink/cobalt/lime + paper/mute; lime under ~5% of any viewport.
+- [x] Hero pills morph on hover, focus and interval with no layout shift; pause toggle works; reduced motion crossfades.
+- [x] Ring: hover and keyboard spotlight, center label swap, caption, arrows/Home/End/Enter; bento on < 1024px.
+- [x] Cursor and View Transition expand work and degrade gracefully.
+- [x] CTA squishes and bursts, then opens mail; works with JS off, reduced motion and modified clicks.
+- [x] 366 unique quotes, deterministic by local day, live midnight swap, tests pass.
+- [x] `npm run lint`, `typecheck`, `test`, `build` all pass.
+- [x] Lighthouse mobile ≥ 95 ×4 (home 99/100/100/100, LCP 2.0s, CLS 0.002, TBT 60-80ms). Checked at 360, 768, 1280, 1920.
+- [x] Zero `Co-Authored-By` or AI mentions in any commit.
 
 ## 11. Assumptions and open questions
 
@@ -229,6 +229,10 @@ type Quote = { id: number; text: string; author: string };
 3. **OVRT** copy, year and role come from the brief and ovrt.in; it has a generated placeholder thumbnail. Needs a real screenshot.
 4. **Dark only.** The palette is black-first, so the light theme and theme toggle are dropped.
 5. **Removed features:** contact form (replaced by mailto + socials), GitHub graph, PR list, experience timeline (single "Freelance" row with no details), blog and highlights (both empty), command palette, sounds. Old URLs redirect.
-6. **Years** for existing projects are estimated from the repo history (2025-2026); please correct in `src/data/projects.ts`.
+6. **No years on projects.** The repo has no reliable dates, so projects carry a `kind` label instead of an invented year.
 7. **Reference media** could not be viewed (CDN blocked); built from the written profiles only.
 8. **Domain:** `metadataBase` defaults to `https://www.ameytarmale.site`.
+9. **Placeholder art.** Nine of the old thumbnails were plain title cards, so those projects now use generated cobalt/lime cover art; only real screenshots (Textlab, Flight Deck, System Design Mafia, ResearchGraph, Cadence) are kept.
+10. **Hero pills and keyboard.** The animated sentence is `aria-hidden` (screen readers get one stable sentence), so pills are not focusable. Keyboard users get a Shuffle button that advances every pill, plus Pause/Play.
+11. **Ring loading.** The ring's code loads only on wide screens with a fine pointer; phones get the server-rendered bento and never download it.
+12. **Subagents.** The audit was small enough (one repo, one live page) to do directly, so no Explore or Plan agents were used.

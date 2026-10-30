@@ -12,7 +12,7 @@ export function About() {
           <p className="mono-label mb-4">02 · About</p>
           <h2
             id="about-title"
-            className="text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em] font-display"
+            className="font-display text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em]"
           >
             Builder, student, <span className="text-cobalt-bright">founder.</span>
           </h2>

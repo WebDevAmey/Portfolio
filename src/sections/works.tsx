@@ -14,7 +14,7 @@ export function Works() {
           <p className="mono-label mb-4">01 · Selected work</p>
           <h2
             id="work-title"
-            className="max-w-[16ch] text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em] font-display"
+            className="max-w-[16ch] font-display text-[length:var(--step-3)] leading-[1.05] font-medium tracking-[-0.03em]"
           >
             Things I&apos;ve designed, built and shipped.
           </h2>
