@@ -1,0 +1,64 @@
+/* Single source of truth for the visual language. JS mirrors motion values in src/lib/motion.ts. */
+:root {
+  color-scheme: dark;
+
+  /* Color */
+  --ink: #0a0a0b;
+  --ink-2: #121316;
+  --ink-3: #1a1b1f;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --cobalt: #0047ff;
+  /* Same hue, lifted for AA text and 3:1 focus rings on ink and ink-2. */
+  --cobalt-bright: #4a7aff;
+  --lime: #c6ff1a;
+  --paper: #f4f4f0;
+  --mute: rgba(244, 244, 240, 0.56);
+
+  /* Type scale */
+  --step-hero: clamp(2.25rem, 1.3rem + 4.2vw, 5.25rem);
+  --step-3: clamp(1.75rem, 1.2rem + 2.4vw, 3.5rem);
+  --step-2: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --step-1: 1.0625rem;
+  --step-0: 0.875rem;
+  --step-mono: 0.6875rem;
+  --tracking-mono: 0.14em;
+
+  /* Space */
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
+  --section-y: clamp(5rem, 3rem + 9vw, 10rem);
+  --content-max: 82rem;
+  --header-h: 3.5rem;
+
+  /* Radius */
+  --radius-pill: 999px;
+  --radius-card: 14px;
+  --radius-sm: 8px;
+
+  /* Motion */
+  --dur-fast: 140ms;
+  --dur-base: 260ms;
+  --dur-slow: 520ms;
+  --dur-burst: 900ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 0.75, 0.2);
+  --ease-squish: cubic-bezier(0.3, 1.6, 0.4, 1);
+  --ease-spring: linear(
+    0,
+    0.009,
+    0.035 2.1%,
+    0.141 4.4%,
+    0.723 12.9%,
+    0.938 16.7%,
+    1.017,
+    1.077 22.4%,
+    1.104 25.3%,
+    1.108 27.6%,
+    1.094 30.4%,
+    1.036 37.1%,
+    1.008 41.7%,
+    0.993 47.5%,
+    0.996 60.1%,
+    1
+  );
+}
