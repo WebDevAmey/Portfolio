@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { projects } from "@/data/projects";
 import { nav, site } from "@/data/site";
@@ -10,13 +10,6 @@ import { Icon, Mark, type IconName } from "./icons";
 import { LocalTime } from "./local-time";
 import hillsCutout from "@/assets/footer/hills-cutout.webp";
 import hills from "@/assets/footer/hills.webp";
-
-const isNightNow = () => {
-  const hour = new Date().getHours();
-  return hour < 6 || hour >= 19;
-};
-
-const subscribeNever = () => () => {};
 
 const socialIcons: Record<string, IconName> = { GitHub: "brackets", X: "xLogo" };
 
@@ -46,14 +39,10 @@ const columns = [
 
 /**
  * A frosted panel of links over a photo of rolling hills. The huge name rises from behind the
- * hills when the footer scrolls into view (click the hills to replay it) and drifts with the
- * pointer; day or night follows the visitor's clock, with a toggle to flip it.
+ * hills letter by letter when the footer scrolls into view (click the hills to replay it) and
+ * drifts with the pointer.
  */
 export function SiteFooter() {
-  const nightByClock = useSyncExternalStore(subscribeNever, isNightNow, () => false);
-  const [override, setOverride] = useState<boolean | null>(null);
-  const night = override ?? nightByClock;
-
   // null until observed, so without JS the name simply sits in place.
   const [risen, setRisen] = useState<boolean | null>(null);
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -114,7 +103,6 @@ export function SiteFooter() {
     <footer
       ref={footerRef}
       className="meadow relative isolate overflow-hidden"
-      data-night={night}
       data-risen={risen ?? undefined}
     >
       <div className="column-wide relative z-20 pt-14 sm:pt-20">
@@ -125,7 +113,7 @@ export function SiteFooter() {
               className="inline-flex items-center gap-2.5"
               aria-label={`${site.name}, home`}
             >
-              <span className="grid size-8 place-items-center rounded-[0.6rem] bg-[var(--on)] text-[13px] text-white transition-colors duration-[var(--fade)] [.meadow[data-night=true]_&]:text-[#0a1022]">
+              <span className="grid size-8 place-items-center rounded-[0.6rem] bg-[var(--on)] text-[13px] text-white">
                 <Mark />
               </span>
               <span className="text-[length:var(--step-1)] font-semibold tracking-[-0.01em]">
@@ -195,15 +183,6 @@ export function SiteFooter() {
                 · Pune <LocalTime /> IST
               </span>
             </p>
-            <button
-              type="button"
-              onClick={() => setOverride(!night)}
-              aria-pressed={night}
-              className={pillClass}
-            >
-              <Icon name={night ? "moon" : "sun"} />
-              Night sky
-            </button>
             <a href="#top" className={pillClass}>
               Back to top
               <Icon name="arrow" className="-rotate-45" />
@@ -211,9 +190,6 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
-
-      <div className="meadow-dusk pointer-events-none absolute inset-0 z-10" aria-hidden="true" />
-      <div className="meadow-stars pointer-events-none absolute inset-0 z-10" aria-hidden="true" />
 
       <div
         ref={sceneRef}
@@ -233,8 +209,16 @@ export function SiteFooter() {
             />
           </div>
           <div className="meadow-name absolute inset-x-0 bottom-[26%] flex justify-center">
-            <span className="meadow-word block leading-[0.78] font-semibold tracking-[-0.065em] text-white transition-colors duration-[var(--fade)]">
-              amey
+            <span className="meadow-word flex leading-[0.78] font-semibold tracking-[-0.065em] text-white">
+              {Array.from("amey").map((letter, i) => (
+                <span
+                  key={i}
+                  className="meadow-letter inline-block"
+                  style={{ transitionDelay: `${i * 130}ms` }}
+                >
+                  {letter}
+                </span>
+              ))}
             </span>
           </div>
           <div className="meadow-ground absolute inset-0">

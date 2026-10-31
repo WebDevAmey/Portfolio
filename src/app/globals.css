@@ -109,7 +109,6 @@
 .meadow {
   --px: 0;
   --py: 0;
-  --fade: 1.2s;
   background: #4794cf;
 }
 .meadow-cover {
@@ -128,54 +127,22 @@
 }
 .meadow-word {
   font-size: 31cqw;
-  transition: transform 1.8s var(--ease-spring);
 }
-.meadow[data-risen="false"] .meadow-word {
-  transform: translateY(70%);
+/* Each letter springs up from behind the hills a beat after the one before it. */
+.meadow-letter {
+  transition: transform 2.4s var(--ease-spring);
+}
+.meadow[data-risen="false"] .meadow-letter {
+  transform: translateY(75%);
   transition-duration: 0s;
+  transition-delay: 0s !important;
 }
 /* The photo's top edge melts into the matching sky colour behind the panel. */
 .meadow-sky {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%);
   mask-image: linear-gradient(to bottom, transparent, #000 22%);
 }
-.meadow-dusk {
-  background: linear-gradient(to bottom, #050a1c, #0d1a3a 55%, #0a1a14);
-  mix-blend-mode: multiply;
-  opacity: 0;
-  transition: opacity var(--fade) var(--ease-out);
-}
-.meadow-stars {
-  opacity: 0;
-  transition: opacity var(--fade) var(--ease-out);
-  background-image:
-    radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 27% 42%, #fff 50%, transparent 51%),
-    radial-gradient(1.4px 1.4px at 41% 12%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 55% 30%, #fff 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 68% 8%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 79% 36%, #fff 50%, transparent 51%),
-    radial-gradient(1.4px 1.4px at 90% 20%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 6% 48%, #fff 50%, transparent 51%);
-  background-size: 560px 380px;
-}
-.meadow[data-night="true"] .meadow-dusk {
-  opacity: 0.82;
-}
-.meadow[data-night="true"] .meadow-stars {
-  opacity: 0.9;
-  animation: twinkle 5s ease-in-out infinite alternate;
-}
-.meadow[data-night="true"] .meadow-word {
-  color: #dfe6ff;
-}
-@keyframes twinkle {
-  to {
-    opacity: 0.5;
-  }
-}
-
-/* Frosted panel holding the footer's links; it darkens with the sky. */
+/* Frosted panel holding the footer's links. */
 .meadow-panel {
   --on: #111111;
   --on-mute: #4a4f55;
@@ -186,17 +153,6 @@
   box-shadow: 0 24px 60px -30px rgba(12, 40, 80, 0.45);
   -webkit-backdrop-filter: blur(18px) saturate(1.3);
   backdrop-filter: blur(18px) saturate(1.3);
-  transition:
-    background-color var(--fade) var(--ease-out),
-    border-color var(--fade) var(--ease-out),
-    color var(--fade) var(--ease-out);
-}
-.meadow[data-night="true"] .meadow-panel {
-  --on: #f2f4fa;
-  --on-mute: #b3bdd0;
-  --chip-on: rgba(255, 255, 255, 0.1);
-  background: rgba(10, 16, 34, 0.62);
-  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Works fan caption: the new project name fades in as the deck reorders. */
@@ -245,16 +201,10 @@
   html {
     scroll-behavior: auto;
   }
-  .meadow {
-    --fade: 0s;
-  }
   .meadow-ground,
   .meadow-name,
-  .meadow-word {
+  .meadow-letter {
     transition: none;
-  }
-  .meadow[data-night="true"] .meadow-stars {
-    animation: none;
   }
   .caption-fade {
     animation: none;
