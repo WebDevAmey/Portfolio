@@ -60,6 +60,8 @@ Companion to `SPEC.md`. Each step is one or two commits on `revamp/v2`. Run `npm
   - `sections/hero.tsx` story paragraph; `components/works-shapes.tsx`; `components/meadow-scene.tsx` and the day/night footer.
 - [x] **12d. Revision 4: card fan and footer after the reference**
   - `components/works-fan.tsx` replaces the shaped grid; footer rebuilt with brand block, columns and the rising wordmark; daily quote moved into About.
+- [x] **12e. Revision 5: photo footer**
+  - Hills photo plus a sky-less cut-out in `src/assets/footer/`; frosted link panel; pointer drift and click-to-replay rise; `meadow-scene.tsx` removed.
 - [ ] **13. Deploy**
   - Push `revamp/v2`; Vercel builds a preview automatically. Merge to `main` only after Amey approves.
 
@@ -76,7 +78,7 @@ src/
     projects/[slug]/page.tsx
     not-found.tsx
   components/             site-header, site-footer, status-badge, icons,
-                          project-thumb, works-fan, meadow-scene,
+                          project-thumb, works-fan,
                           squish-button, daily-quote, local-time
   sections/               hero, works, about, contact
   data/                   site.ts, projects.ts, quotes.json

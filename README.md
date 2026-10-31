@@ -31,7 +31,7 @@ npm run dev        # http://localhost:3000
 src/
   app/            layout, home page, case studies, sitemap, robots, OG image, fonts
   sections/       hero, works, about, contact
-  components/     header, meadow footer, works card fan, CTA, daily quote, local time, icons
+  components/     header, photo footer, works card fan, CTA, daily quote, local time, icons
   data/           site.ts (bio, links, hero words), projects.ts, quotes.json
   lib/            quote logic, motion tokens for JS, shard burst, helpers
   styles/         tokens.css (colors, type scale, spacing, radii, durations, easings)
@@ -64,9 +64,9 @@ A case study page is generated at `/projects/<slug>` automatically.
 
 Bricolage Grotesque and JetBrains Mono (both SIL OFL 1.1) are self-hosted from `src/app/fonts/` as Latin subsets. Bricolage is shipped as one small static instance (weights 400 to 600) cut from the variable font.
 
-## The footer meadow
+## The footer
 
-`src/components/meadow-scene.tsx` draws the scene as one SVG; `src/components/site-footer.tsx` picks day or night from the visitor's clock, holds the toggle, and raises the name when the footer scrolls into view. Day and night colours are CSS custom properties on `.meadow` in `src/app/globals.css`, registered with `@property` so they crossfade.
+The footer background is a photo in `src/assets/footer/`: `hills.webp` and `hills-cutout.webp`, the same photo with the sky removed, which is drawn above the big name so it sits behind the hills. To use a different photo, replace both files with the same dimensions (make the cut-out by masking everything above the horizon). `src/components/site-footer.tsx` handles day and night, the pointer drift and the rise.
 
 ## Deploy
 

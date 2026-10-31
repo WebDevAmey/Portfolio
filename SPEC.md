@@ -2,6 +2,8 @@
 
 Owner: Amey Tarmale · Branch: `revamp/v2` · Live: https://www.ameytarmale.site
 
+> **Revision 5 (photo footer).** The illustrated meadow is replaced by Amey's photo of rolling hills (`src/assets/footer/hills.webp`, 1200x800, served by `next/image` as AVIF/WebP, lazy-loaded with a blur placeholder). A cut-out of just the hills (`hills-cutout.webp`, sky made transparent) sits above the huge white "amey", so the name rises from behind the real hills; both images share one 3:2 cover box anchored to the bottom, so they stay aligned at every width. All links, socials, the Night sky toggle and back to top live on a frosted panel over the sky. Moving the pointer drifts the ground and the name by different amounts; clicking the hills replays the rise. Night darkens the photo with a navy multiply layer and stars, and the panel turns dark. Reduced motion turns off the drift, the rise and the twinkle. Supersedes the meadow illustration in revisions 3 and 4.
+
 > **Revision 4 (card fan, footer after Amey's reference).** Supersedes the works and footer notes in revision 3.
 >
 > - **Works card fan.** The six featured projects sit in a fanned hand of white-framed cards (`components/works-fan.tsx`): the front card in the middle, the rest alternating left and right with growing tilt (6° per step), a slight drop and scale so the hand reads as an arc, and deeper shadows toward the front. Clicking a side card rotates the deck so it comes to the front (380ms ease-out); the front card links to its case study. Arrow buttons and the Left/Right keys shuffle too, and focus moves to the new front card. A caption below crossfades (220ms) to the project name, type and summary, with a 01/06 counter. Reduced motion keeps the same layout and swaps instantly.
