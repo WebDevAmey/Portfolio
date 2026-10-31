@@ -3,8 +3,8 @@ import { about, facts } from "@/data/site";
 export function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="column pb-[var(--section-y)]">
-      <p className="mono-label mb-3">02 · About</p>
-      <h2 id="about-title" className="section-title">
+      <p className="mono-label mb-3 text-center">02 · About</p>
+      <h2 id="about-title" className="section-title text-center">
         Builder, student, founder.
       </h2>
       <div className="mt-5 space-y-4 text-fg-2">

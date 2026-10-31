@@ -2,7 +2,7 @@
 :root {
   color-scheme: light;
 
-  /* Color: black on warm white. The pond is the only colour on the page. */
+  /* Color: black on warm white, with pastel markers in the intro and the meadow in the footer. */
   --bg: #f7f7f5;
   --surface: #ffffff;
   --chip: #ececea;
@@ -12,9 +12,17 @@
   --mute: #666666;
   --line: rgba(17, 17, 17, 0.08);
   --line-strong: rgba(17, 17, 17, 0.16);
+  /* Pastel markers behind keywords in the intro. Text on all of them is --fg (over 15:1). */
+  --hl-yellow: #fbefc6;
+  --hl-violet: #e8e1f8;
+  --hl-green: #dcefdc;
+  --hl-blue: #dce8fb;
+  --hl-pink: #f9dfe6;
+  --hl-peach: #fde0d2;
 
   /* Type scale */
   --step-display: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --step-intro: clamp(1.1875rem, 0.95rem + 1vw, 1.625rem);
   --step-2: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
   --step-1: 1.0625rem;
   --step-0: 0.9375rem;
@@ -22,9 +30,9 @@
   --step-mono: 0.6875rem;
   --tracking-mono: 0.12em;
 
-  /* Layout: one centred column; the pond and the works stage are allowed to be wider. */
+  /* Layout: one centred column; the works grid is allowed to be wider. */
   --gutter: clamp(1.25rem, 0.6rem + 2.6vw, 2.5rem);
-  --measure: 40rem;
+  --measure: 42rem;
   --wide: 60rem;
   --section-y: clamp(4.5rem, 3rem + 6vw, 8rem);
   --nav-h: 3rem;

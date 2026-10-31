@@ -1,5 +1,3 @@
-import type { IconName } from "@/components/icons";
-
 export const site = {
   name: "Amey Tarmale",
   shortName: "Amey",
@@ -46,33 +44,3 @@ export const facts = [
   { label: "Building", value: "OVRT" },
   { label: "Works in", value: "TypeScript, React, Next.js, Node, Python" },
 ] as const;
-
-export type HeroWord = { word: string; icon: IconName };
-
-/** Each slot cycles through its words. The first word of each forms the static sentence. */
-export const heroSlots: HeroWord[][] = [
-  [
-    { word: "products", icon: "cube" },
-    { word: "agents", icon: "orbit" },
-    { word: "systems", icon: "layers" },
-    { word: "tools", icon: "window" },
-  ],
-  [
-    { word: "founders", icon: "flag" },
-    { word: "builders", icon: "brackets" },
-    { word: "startups", icon: "bag" },
-    { word: "makers", icon: "eye" },
-  ],
-  [
-    { word: "motion", icon: "curve" },
-    { word: "details", icon: "target" },
-    { word: "latency", icon: "timer" },
-    { word: "pixels", icon: "glyph" },
-  ],
-  [
-    { word: "Pune", icon: "pin" },
-    { word: "India", icon: "flag" },
-    { word: "day one", icon: "axiom" },
-    { word: "scratch", icon: "prompt" },
-  ],
-];
