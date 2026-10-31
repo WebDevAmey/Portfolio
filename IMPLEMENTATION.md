@@ -82,7 +82,7 @@ src/
   components/             site-header, site-footer, status-badge, icons,
                           project-thumb, works-fan,
                           squish-button, daily-quote, local-time
-  sections/               hero, works, about, contact
+  sections/               hero, works, stack, contact
   data/                   site.ts, projects.ts, quotes.json
   lib/                    motion.ts, quotes.ts, quotes.test.ts, shards.ts,
                           use-reduced-motion.ts, project-art.ts
