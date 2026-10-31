@@ -30,7 +30,7 @@ npm run dev        # http://localhost:3000
 ```text
 src/
   app/            layout, home page, case studies, sitemap, robots, OG image, fonts
-  sections/       hero, works, about, contact
+  sections/       hero, works, stack, contact
   components/     header, photo footer, works card fan, CTA, daily quote, local time, icons
   data/           site.ts (bio, links, hero words), projects.ts, quotes.json
   lib/            quote logic, motion tokens for JS, shard burst, helpers
@@ -58,6 +58,8 @@ A case study page is generated at `/projects/<slug>` automatically.
 
 - Bio, links, status badge: `src/data/site.ts`
 - Intro paragraph: `src/sections/hero.tsx`
+- Tech stack logos: `src/components/stack-icons.tsx` (icons from `simple-icons`)
+- GitHub calendar: fetched from the public profile at build time and refreshed daily (`src/lib/github.ts`). If it shows nothing, turn on "Include private contributions on my profile" in GitHub settings.
 - Resume: drop a PDF in `public/resume.pdf` and set `resumeUrl: "/resume.pdf"` in `src/data/site.ts`.
 
 ## Fonts
@@ -66,7 +68,7 @@ Bricolage Grotesque and JetBrains Mono (both SIL OFL 1.1) are self-hosted from `
 
 ## The footer
 
-The footer background is a photo in `src/assets/footer/`: `hills.webp` and `hills-cutout.webp`, the same photo with the sky removed, which is drawn above the big name so it sits behind the hills. To use a different photo, replace both files with the same dimensions (make the cut-out by masking everything above the horizon). `src/components/site-footer.tsx` handles day and night, the pointer drift and the rise.
+The footer background is a photo in `src/assets/footer/`: `hills.webp` and `hills-cutout.webp`, the same photo with the sky removed, which is drawn above the big name so it sits behind the hills. To use a different photo, replace both files with the same dimensions (make the cut-out by masking everything above the horizon). `src/components/site-footer.tsx` handles the pointer drift and the letter-by-letter rise.
 
 ## Deploy
 

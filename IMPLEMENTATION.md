@@ -62,6 +62,8 @@ Companion to `SPEC.md`. Each step is one or two commits on `revamp/v2`. Run `npm
   - `components/works-fan.tsx` replaces the shaped grid; footer rebuilt with brand block, columns and the rising wordmark; daily quote moved into About.
 - [x] **12e. Revision 5: photo footer**
   - Hills photo plus a sky-less cut-out in `src/assets/footer/`; frosted link panel; pointer drift and click-to-replay rise; `meadow-scene.tsx` removed.
+- [x] **12f. Revision 6: stack and contributions**
+  - `sections/stack.tsx`, `components/stack-icons.tsx`, `components/contributions-chart.tsx`, `lib/github.ts` + test; night sky removed; letter-by-letter rise.
 - [ ] **13. Deploy**
   - Push `revamp/v2`; Vercel builds a preview automatically. Merge to `main` only after Amey approves.
 

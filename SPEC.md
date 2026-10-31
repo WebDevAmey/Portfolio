@@ -2,6 +2,8 @@
 
 Owner: Amey Tarmale · Branch: `revamp/v2` · Live: https://www.ameytarmale.site
 
+> **Revision 6 (stack and contributions).** The About section is replaced by a Stack section (`sections/stack.tsx`, nav "Stack", `#stack`): tech logo chips from `simple-icons` (black at rest, brand colour on hover), a GitHub contribution calendar read from the public calendar at build time and refreshed daily (`lib/github.ts`, tested; it renders an empty calendar if GitHub can't be reached and hides a zero total), and the line of the day. The footer's night sky is removed for now, and the big name now rises letter by letter (130ms apart, spring easing over 2.4s).
+
 > **Revision 5 (photo footer).** The illustrated meadow is replaced by Amey's photo of rolling hills (`src/assets/footer/hills.webp`, 1200x800, served by `next/image` as AVIF/WebP, lazy-loaded with a blur placeholder). A cut-out of just the hills (`hills-cutout.webp`, sky made transparent) sits above the huge white "amey", so the name rises from behind the real hills; both images share one 3:2 cover box anchored to the bottom, so they stay aligned at every width. All links, socials, the Night sky toggle and back to top live on a frosted panel over the sky. Moving the pointer drifts the ground and the name by different amounts; clicking the hills replays the rise. Night darkens the photo with a navy multiply layer and stars, and the panel turns dark. Reduced motion turns off the drift, the rise and the twinkle. Supersedes the meadow illustration in revisions 3 and 4.
 
 > **Revision 4 (card fan, footer after Amey's reference).** Supersedes the works and footer notes in revision 3.
@@ -67,7 +69,7 @@ Single page, anchored sections, plus generated case-study pages.
   header              Home mark · Work · About · Contact · Resume (floating pill)
   #top     Intro      Status badge + story paragraph with badges and highlighted keywords
   #work    Works      Six featured projects in a fanned card deck
-  #about   About      4 sentences + fact list + line of the day
+  #stack   Stack      Tech logos, GitHub contribution calendar, line of the day
   #contact Contact    Statement + squishy "Get in touch" CTA + direct links
   footer              Brand, socials, link columns; meadow with the name rising behind the hills
 /projects/[slug]      Case study (static, one per project), shares the thumbnail via View Transition
