@@ -55,6 +55,9 @@ Companion to `SPEC.md`. Each step is one or two commits on `revamp/v2`. Run `npm
   - `lib/pond/*` and `components/pond-canvas.tsx`; hero intro under the pond.
   - Restyle works, about, contact and the case study; redesign the footer with `components/local-time.tsx`.
   - `refactor: remove the custom cursor and display font`, `feat(pond): …`, `style: …`, `feat(footer): …`
+- [x] **12c. Revision 3: story intro, shaped works, meadow footer**
+  - Remove the pond, the morph pill, the ring and the bento grid.
+  - `sections/hero.tsx` story paragraph; `components/works-shapes.tsx`; `components/meadow-scene.tsx` and the day/night footer.
 - [ ] **13. Deploy**
   - Push `revamp/v2`; Vercel builds a preview automatically. Merge to `main` only after Amey approves.
 
@@ -70,14 +73,13 @@ src/
     sitemap.ts robots.ts opengraph-image.tsx
     projects/[slug]/page.tsx
     not-found.tsx
-  components/             site-header, site-footer, status-badge, morph-pill, icons,
-                          project-thumb, works-ring, works-bento, pond-canvas,
+  components/             site-header, site-footer, status-badge, icons,
+                          project-thumb, works-shapes, meadow-scene,
                           squish-button, daily-quote, local-time
   sections/               hero, works, about, contact
   data/                   site.ts, projects.ts, quotes.json
   lib/                    motion.ts, quotes.ts, quotes.test.ts, shards.ts,
                           use-reduced-motion.ts, project-art.ts
-  lib/pond/               engine.ts, koi.ts, scenery.ts, caustics.ts, random.ts
   styles/tokens.css
 public/project-image/     existing thumbnails (dark variants only)
 ```
@@ -90,7 +92,7 @@ public/project-image/     existing thumbnails (dark variants only)
   - DST: dates on both sides of DST changes, evaluated with `TZ=America/New_York` and `TZ=Europe/London`, plus 00:30 and 23:30 on a transition day.
   - `getQuoteForDate` returns id 366 only on leap-year 31 Dec; `msUntilNextMidnight` is positive and ≤ 24h (25h on a DST fall-back day).
 - Static checks: `eslint`, `tsc --noEmit`, `next build`.
-- Manual/automated browser checks with Playwright: screenshots at 360, 768, 1280, 1920; keyboard walk (Tab order, ring arrows, Enter); `reducedMotion: 'reduce'` context; console free of errors.
+- Manual/automated browser checks with Playwright: screenshots at 360, 768, 1280, 1920; keyboard walk (Tab order, Enter on cards); `reducedMotion: 'reduce'` context; console free of errors.
 - Lighthouse CLI (mobile preset) against `next start`.
 
 ## Rollback

@@ -2,6 +2,12 @@
 
 Owner: Amey Tarmale · Branch: `revamp/v2` · Live: https://www.ameytarmale.site
 
+> **Revision 3 (story intro, shaped works, meadow footer).** Amey asked to drop the koi pond and the morphing "I build…" sentence, show his info as a story paragraph, centre things more, show fewer projects in new shapes, and turn the footer into a meadow. This supersedes the pond, hero and footer notes in revision 2.
+>
+> - **Intro.** Centred status badge, then one narrative paragraph: inline badges with small black icon tiles (MIT-WPU, Pune, OVRT), pastel markers behind keywords that double as links (`--hl-*` tokens, all with `--fg` text above 15:1), muted asides, and a "Let's talk" marker to the contact card. Chunks fade in from a soft blur; reduced motion fades only.
+> - **Works.** Only featured projects (six), in a centred grid. Each card has its own silhouette (arch, circle, pill, leaf, tilted card, pebble) inside an equal footprint so names line up; grayscale at rest, colour on hover or focus. A "More on GitHub" link replaces the list. The ring and bento components are removed; every case-study page still exists.
+> - **Footer meadow.** An original SVG scene: far and near hills with the oversized lowercase wordmark "amey" between them, so the near hill hides its lower half; crystals and a glass sphere on the slope, wildflowers, clouds, sun or moon. Day or night follows the visitor's local clock (night from 19:00 to 06:00) and a "Night sky" toggle flips it; colours are registered custom properties so the two states crossfade over 1.4s, while stars, fireflies and crystal glows fade in at night. The line of the day and link columns sit in the sky, and a slim bar on the hill holds the copyright, back to top and the toggle. Reduced motion stops the drift, twinkle and fireflies and swaps states instantly.
+
 > **Revision 2 (black and white, koi pond).** After reviewing the first build, Amey asked for a cleaner, minimal, black-and-white site with an animated koi pond at the centre, no custom cursor and a better footer. This revision supersedes the dark cobalt/lime palette, the display font cut, the magnetic cursor, the header and the footer described below; everything else still applies.
 >
 > - **Palette.** Black on warm white: `--bg #F7F7F5`, `--surface #FFF`, `--chip #ECECEA`, `--fg #111`, `--fg-2 #2A2A2A`, `--mute #666` (5.35:1 on bg, 4.85:1 on chip), hairlines at 8% and 16% black. No accent hue. The pond is the only colour on the page; project screenshots stay grayscale in the ring until a card is active.
@@ -52,11 +58,11 @@ Single page, anchored sections, plus generated case-study pages.
 ```
 /                     Home
   header              Home mark · Work · About · Contact · Resume (floating pill)
-  #top     Hero       Koi pond, then status badge + morphing pill sentence
-  #work    Works      Desktop: ring spotlight. Tablet/mobile: bento + index list
+  #top     Intro      Status badge + story paragraph with badges and highlighted keywords
+  #work    Works      Six featured projects, each card a different shape
   #about   About      4 sentences + fact list
   #contact Contact    Statement + squishy "Get in touch" CTA + direct links
-  footer              Daily quote · link columns · Pune time · back to top · wordmark
+  footer              Meadow scene: daily quote, link columns, wordmark behind hills, day/night
 /projects/[slug]      Case study (static, one per project), shares the thumbnail via View Transition
 ```
 
