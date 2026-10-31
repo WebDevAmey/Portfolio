@@ -1,4 +1,4 @@
-import { About } from "@/sections/about";
+import { Stack } from "@/sections/stack";
 import { Contact } from "@/sections/contact";
 import { Hero } from "@/sections/hero";
 import { Works } from "@/sections/works";
@@ -25,7 +25,7 @@ export default function Home() {
       />
       <Hero />
       <Works />
-      <About />
+      <Stack />
       <Contact />
     </>
   );
