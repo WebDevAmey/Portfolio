@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
@@ -7,7 +8,8 @@ import { projects } from "@/data/projects";
 import { nav, site } from "@/data/site";
 import { Icon, Mark, type IconName } from "./icons";
 import { LocalTime } from "./local-time";
-import { MeadowScene } from "./meadow-scene";
+import hillsCutout from "@/assets/footer/hills-cutout.webp";
+import hills from "@/assets/footer/hills.webp";
 
 const isNightNow = () => {
   const hour = new Date().getHours();
@@ -19,7 +21,10 @@ const subscribeNever = () => () => {};
 const socialIcons: Record<string, IconName> = { GitHub: "brackets", X: "xLogo" };
 
 const linkClass =
-  "inline-flex min-h-9 items-center gap-1.5 text-[length:var(--step-small)] text-[var(--on-sky-mute)] transition-colors hover:text-[var(--on-sky)]";
+  "inline-flex min-h-9 items-center gap-1.5 text-[length:var(--step-small)] text-[var(--on-mute)] transition-colors hover:text-[var(--on)]";
+
+const pillClass =
+  "inline-flex min-h-10 items-center gap-1.5 rounded-full bg-[var(--chip-on)] px-3.5 font-medium transition-[background-color,transform] duration-[var(--dur-base)] ease-squish hover:-translate-y-0.5 active:scale-95";
 
 const columns = [
   {
@@ -40,8 +45,9 @@ const columns = [
 ];
 
 /**
- * A light footer that opens onto a meadow. The huge name rises from behind the hills when the
- * footer scrolls into view; day or night follows the visitor's clock, with a toggle to flip it.
+ * A frosted panel of links over a photo of rolling hills. The huge name rises from behind the
+ * hills when the footer scrolls into view (click the hills to replay it) and drifts with the
+ * pointer; day or night follows the visitor's clock, with a toggle to flip it.
  */
 export function SiteFooter() {
   const nightByClock = useSyncExternalStore(subscribeNever, isNightNow, () => false);
@@ -69,71 +75,100 @@ export function SiteFooter() {
     return () => io.disconnect();
   }, []);
 
+  // Gentle pointer parallax: the ground and the name drift by different amounts.
+  const footerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+    const fine = window.matchMedia("(pointer: fine)").matches;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!fine || still) return;
+    let frame = 0;
+    const set = (x: number, y: number) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        footer.style.setProperty("--px", x.toFixed(3));
+        footer.style.setProperty("--py", y.toFixed(3));
+      });
+    };
+    const onMove = (e: PointerEvent) => {
+      const r = footer.getBoundingClientRect();
+      set(((e.clientX - r.left) / r.width) * 2 - 1, ((e.clientY - r.top) / r.height) * 2 - 1);
+    };
+    const onLeave = () => set(0, 0);
+    footer.addEventListener("pointermove", onMove);
+    footer.addEventListener("pointerleave", onLeave);
+    return () => {
+      cancelAnimationFrame(frame);
+      footer.removeEventListener("pointermove", onMove);
+      footer.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
+
+  const replay = () => {
+    setRisen(false);
+    requestAnimationFrame(() => requestAnimationFrame(() => setRisen(true)));
+  };
+
   return (
     <footer
-      className="meadow relative overflow-hidden"
+      ref={footerRef}
+      className="meadow relative isolate overflow-hidden"
       data-night={night}
       data-risen={risen ?? undefined}
     >
-      <div
-        className="meadow-stars meadow-night pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      />
-
-      <div className="column-wide relative grid gap-12 pt-16 sm:pt-24 md:grid-cols-[minmax(0,1fr)_auto] md:gap-16">
-        <div className="max-w-[22rem]">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2.5"
-            aria-label={`${site.name}, home`}
-          >
-            <span className="grid size-8 place-items-center rounded-[0.6rem] bg-[var(--on-sky)] text-[13px] text-[var(--sky-top)]">
-              <Mark />
-            </span>
-            <span className="text-[length:var(--step-1)] font-semibold tracking-[-0.01em]">
-              {site.name}
-            </span>
-          </Link>
-          <p className="mt-4 text-[length:var(--step-small)] leading-relaxed text-[var(--on-sky)]">
-            Building OVRT and small, careful tools for the web, one commit at a time from Pune.
-          </p>
-          <ul className="mt-6 flex items-center gap-1" aria-label="Social links">
-            {site.socials.map((s) => (
-              <li key={s.label}>
+      <div className="column-wide relative z-20 pt-14 sm:pt-20">
+        <div className="meadow-panel grid gap-10 rounded-[2rem] p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-14">
+          <div className="max-w-[22rem]">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2.5"
+              aria-label={`${site.name}, home`}
+            >
+              <span className="grid size-8 place-items-center rounded-[0.6rem] bg-[var(--on)] text-[13px] text-white transition-colors duration-[var(--fade)] [.meadow[data-night=true]_&]:text-[#0a1022]">
+                <Mark />
+              </span>
+              <span className="text-[length:var(--step-1)] font-semibold tracking-[-0.01em]">
+                {site.name}
+              </span>
+            </Link>
+            <p className="mt-4 text-[length:var(--step-small)] leading-relaxed">
+              Building OVRT and small, careful tools for the web, one commit at a time from Pune.
+            </p>
+            <ul className="mt-5 -ml-2 flex items-center gap-1" aria-label="Social links">
+              {site.socials.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener me"
+                    aria-label={s.label}
+                    className="grid size-10 place-items-center rounded-full transition-[background-color,transform] duration-[var(--dur-base)] ease-squish hover:-translate-y-0.5 hover:bg-[var(--chip-on)]"
+                  >
+                    {socialIcons[s.label] ? (
+                      <Icon name={socialIcons[s.label]} className="text-[17px]" strokeWidth={2} />
+                    ) : (
+                      <span className="text-[15px] font-bold tracking-[-0.04em]">in</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+              <li>
                 <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener me"
-                  aria-label={s.label}
-                  className="grid size-10 place-items-center rounded-full text-[var(--on-sky)] transition-colors hover:bg-[var(--chip-on-sky)]"
+                  href={`mailto:${site.email}`}
+                  aria-label={`Email ${site.email}`}
+                  className="grid size-10 place-items-center rounded-full transition-[background-color,transform] duration-[var(--dur-base)] ease-squish hover:-translate-y-0.5 hover:bg-[var(--chip-on)]"
                 >
-                  {socialIcons[s.label] ? (
-                    <Icon name={socialIcons[s.label]} className="text-[17px]" strokeWidth={2} />
-                  ) : (
-                    <span className="text-[15px] font-bold tracking-[-0.04em]">in</span>
-                  )}
+                  <Icon name="mail" className="text-[17px]" strokeWidth={2} />
                 </a>
               </li>
-            ))}
-            <li>
-              <a
-                href={`mailto:${site.email}`}
-                aria-label={`Email ${site.email}`}
-                className="grid size-10 place-items-center rounded-full text-[var(--on-sky)] transition-colors hover:bg-[var(--chip-on-sky)]"
-              >
-                <Icon name="mail" className="text-[17px]" strokeWidth={2} />
-              </a>
-            </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        <div>
-          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:gap-x-16">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:gap-x-14">
             {columns.map((col) => (
               <nav key={col.title} aria-label={col.title}>
-                <h2 className="mb-3 text-[length:var(--step-small)] font-semibold text-[var(--on-sky)]">
-                  {col.title}
-                </h2>
+                <h2 className="mb-2 text-[length:var(--step-small)] font-semibold">{col.title}</h2>
                 <ul>
                   {col.links.map((l) => (
                     <li key={l.label}>
@@ -152,26 +187,24 @@ export function SiteFooter() {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-1 text-[length:var(--step-small)] text-[var(--on-sky)]">
-            <p className="font-medium">
-              © {new Date().getFullYear()} {site.name}.
-            </p>
-            <p className="text-[var(--on-sky-mute)]">
-              Pune · <LocalTime /> IST
+          <div className="flex flex-wrap items-center gap-2 border-t border-[var(--chip-on)] pt-5 text-[length:var(--step-small)] lg:col-span-2">
+            <p className="mr-auto font-medium">
+              © {new Date().getFullYear()} {site.name}
+              <span className="font-normal text-[var(--on-mute)]">
+                {" "}
+                · Pune <LocalTime /> IST
+              </span>
             </p>
             <button
               type="button"
               onClick={() => setOverride(!night)}
               aria-pressed={night}
-              className="-ml-2 inline-flex min-h-11 items-center gap-1.5 rounded-full px-2 text-[var(--on-sky-mute)] transition-colors hover:text-[var(--on-sky)]"
+              className={pillClass}
             >
               <Icon name={night ? "moon" : "sun"} />
               Night sky
             </button>
-            <a
-              href="#top"
-              className="-ml-2 inline-flex min-h-11 items-center gap-1.5 rounded-full px-2 text-[var(--on-sky-mute)] transition-colors hover:text-[var(--on-sky)]"
-            >
+            <a href="#top" className={pillClass}>
               Back to top
               <Icon name="arrow" className="-rotate-45" />
             </a>
@@ -179,8 +212,41 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div ref={sceneRef} className="relative -mt-4 h-[12rem] sm:-mt-[9vw] sm:h-auto">
-        <MeadowScene />
+      <div className="meadow-dusk pointer-events-none absolute inset-0 z-10" aria-hidden="true" />
+      <div className="meadow-stars pointer-events-none absolute inset-0 z-10" aria-hidden="true" />
+
+      <div
+        ref={sceneRef}
+        onClick={replay}
+        aria-hidden="true"
+        className="[container-type:size] relative z-0 -mt-32 aspect-[4/5] w-full cursor-pointer select-none min-[480px]:aspect-[4/3] sm:-mt-16 md:aspect-[16/9] lg:-mt-28 lg:aspect-[2/1]"
+      >
+        <div className="meadow-cover absolute bottom-0 left-1/2 -translate-x-1/2">
+          <div className="meadow-ground meadow-sky absolute inset-0">
+            <Image
+              src={hills}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 100vw, 160vw"
+              placeholder="blur"
+              className="object-cover"
+            />
+          </div>
+          <div className="meadow-name absolute inset-x-0 bottom-[26%] flex justify-center">
+            <span className="meadow-word block leading-[0.78] font-semibold tracking-[-0.065em] text-white transition-colors duration-[var(--fade)]">
+              amey
+            </span>
+          </div>
+          <div className="meadow-ground absolute inset-0">
+            <Image
+              src={hillsCutout}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 100vw, 160vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
       </div>
     </footer>
   );

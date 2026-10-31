@@ -105,123 +105,49 @@
   }
 }
 
-/* Footer meadow. Registered colours so day and night crossfade instead of snapping. */
-@property --sky-top {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #f3f3f1;
-}
-@property --sky-bottom {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #8fcbef;
-}
-@property --hill-back {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #8fc06d;
-}
-@property --hill-front {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #5f9e46;
-}
-@property --hill-deep {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #2f6424;
-}
-@property --chip-on-sky {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: rgba(17, 17, 17, 0.07);
-}
-@property --on-sky {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #111111;
-}
-@property --on-sky-mute {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #3d4a58;
-}
-@property --wordmark {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #ffffff;
-}
-@property --cloud-alpha {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 0.85;
-}
-
+/* Footer: a photo of rolling hills with the huge name tucked behind them. */
 .meadow {
-  --sky-top: #f3f3f1;
-  --sky-bottom: #8fcbef;
-  --chip-on-sky: rgba(17, 17, 17, 0.07);
-  --hill-back: #8fc06d;
-  --hill-front: #5f9e46;
-  --hill-deep: #2f6424;
-  --on-sky: #111111;
-  --on-sky-mute: #555b62;
-  --wordmark: #ffffff;
-  --cloud-alpha: 0.85;
-  --meadow-fade: 1.4s;
-  color: var(--on-sky);
-  background: linear-gradient(
-    to bottom,
-    var(--sky-top) 0%,
-    var(--sky-top) 38%,
-    var(--sky-bottom) 100%
-  );
-  transition-property:
-    --sky-top, --sky-bottom, --chip-on-sky, --hill-back, --hill-front, --hill-deep, --on-sky,
-    --on-sky-mute, --wordmark, --cloud-alpha;
-  transition-duration: var(--meadow-fade);
-  transition-timing-function: var(--ease-out);
+  --px: 0;
+  --py: 0;
+  --fade: 1.2s;
+  background: #4794cf;
 }
-.meadow[data-night="true"] {
-  --sky-top: #060a15;
-  --sky-bottom: #1b2744;
-  --hill-back: #1c3326;
-  --hill-front: #14271b;
-  --hill-deep: #0b170f;
-  --on-sky: #f2f4fa;
-  --chip-on-sky: rgba(255, 255, 255, 0.1);
-  --on-sky-mute: #a7b2c7;
-  --wordmark: #e9ecf7;
-  --cloud-alpha: 0.12;
+.meadow-cover {
+  /* Covers the scene box at the photo's own 3:2 ratio, anchored to the bottom, so the hill
+     cut-out, the photo and the name stay aligned at every size. */
+  width: max(100cqw, 150cqh);
+  aspect-ratio: 3 / 2;
 }
-.meadow .mono-label,
-.meadow .text-mute {
-  color: var(--on-sky-mute);
+.meadow-ground {
+  transform: translate3d(calc(var(--px) * -10px), calc(var(--py) * -5px), 0) scale(1.04);
+  transition: transform 600ms var(--ease-out);
 }
-/* The huge name rises from behind the hills, overshooting a touch before it settles. */
+.meadow-name {
+  transform: translate3d(calc(var(--px) * 22px), calc(var(--py) * 6px), 0);
+  transition: transform 600ms var(--ease-out);
+}
 .meadow-word {
-  transform-box: fill-box;
+  font-size: 31cqw;
   transition: transform 1.8s var(--ease-spring);
 }
 .meadow[data-risen="false"] .meadow-word {
-  transform: translateY(78%);
+  transform: translateY(70%);
   transition-duration: 0s;
 }
-
-.meadow-day,
-.meadow-night {
-  transition: opacity var(--meadow-fade) var(--ease-out);
+/* The photo's top edge melts into the matching sky colour behind the panel. */
+.meadow-sky {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%);
+  mask-image: linear-gradient(to bottom, transparent, #000 22%);
 }
-.meadow-night {
+.meadow-dusk {
+  background: linear-gradient(to bottom, #050a1c, #0d1a3a 55%, #0a1a14);
+  mix-blend-mode: multiply;
   opacity: 0;
-}
-.meadow[data-night="true"] .meadow-night {
-  opacity: 1;
-}
-.meadow[data-night="true"] .meadow-day {
-  opacity: 0;
+  transition: opacity var(--fade) var(--ease-out);
 }
 .meadow-stars {
+  opacity: 0;
+  transition: opacity var(--fade) var(--ease-out);
   background-image:
     radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%),
     radial-gradient(1px 1px at 27% 42%, #fff 50%, transparent 51%),
@@ -230,48 +156,47 @@
     radial-gradient(1.2px 1.2px at 68% 8%, #fff 50%, transparent 51%),
     radial-gradient(1px 1px at 79% 36%, #fff 50%, transparent 51%),
     radial-gradient(1.4px 1.4px at 90% 20%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 6% 48%, #fff 50%, transparent 51%),
-    radial-gradient(1px 1px at 35% 26%, #fff 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 62% 46%, #fff 50%, transparent 51%);
-  background-size: 640px 420px;
+    radial-gradient(1px 1px at 6% 48%, #fff 50%, transparent 51%);
+  background-size: 560px 380px;
+}
+.meadow[data-night="true"] .meadow-dusk {
+  opacity: 0.82;
 }
 .meadow[data-night="true"] .meadow-stars {
+  opacity: 0.9;
   animation: twinkle 5s ease-in-out infinite alternate;
+}
+.meadow[data-night="true"] .meadow-word {
+  color: #dfe6ff;
 }
 @keyframes twinkle {
   to {
-    opacity: 0.55;
-  }
-}
-.meadow-cloud {
-  animation: cloud-drift 38s ease-in-out infinite alternate;
-}
-@keyframes cloud-drift {
-  from {
-    transform: translateX(-40px);
-  }
-  to {
-    transform: translateX(60px);
-  }
-}
-.meadow-firefly {
-  transform-box: fill-box;
-  animation: firefly 9s ease-in-out infinite;
-}
-@keyframes firefly {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.2;
-  }
-  30% {
-    transform: translate(18px, -14px);
-    opacity: 1;
-  }
-  60% {
-    transform: translate(-10px, -26px);
     opacity: 0.5;
   }
+}
+
+/* Frosted panel holding the footer's links; it darkens with the sky. */
+.meadow-panel {
+  --on: #111111;
+  --on-mute: #4a4f55;
+  --chip-on: rgba(17, 17, 17, 0.07);
+  color: var(--on);
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 24px 60px -30px rgba(12, 40, 80, 0.45);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  transition:
+    background-color var(--fade) var(--ease-out),
+    border-color var(--fade) var(--ease-out),
+    color var(--fade) var(--ease-out);
+}
+.meadow[data-night="true"] .meadow-panel {
+  --on: #f2f4fa;
+  --on-mute: #b3bdd0;
+  --chip-on: rgba(255, 255, 255, 0.1);
+  background: rgba(10, 16, 34, 0.62);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Works fan caption: the new project name fades in as the deck reorders. */
@@ -321,13 +246,13 @@
     scroll-behavior: auto;
   }
   .meadow {
-    --meadow-fade: 0s;
+    --fade: 0s;
   }
+  .meadow-ground,
+  .meadow-name,
   .meadow-word {
     transition: none;
   }
-  .meadow-cloud,
-  .meadow-firefly,
   .meadow[data-night="true"] .meadow-stars {
     animation: none;
   }
