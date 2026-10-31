@@ -109,12 +109,12 @@
 @property --sky-top {
   syntax: "<color>";
   inherits: true;
-  initial-value: #eef4f9;
+  initial-value: #f3f3f1;
 }
 @property --sky-bottom {
   syntax: "<color>";
   inherits: true;
-  initial-value: #b4d0ec;
+  initial-value: #8fcbef;
 }
 @property --hill-back {
   syntax: "<color>";
@@ -130,6 +130,11 @@
   syntax: "<color>";
   inherits: true;
   initial-value: #2f6424;
+}
+@property --chip-on-sky {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(17, 17, 17, 0.07);
 }
 @property --on-sky {
   syntax: "<color>";
@@ -153,13 +158,14 @@
 }
 
 .meadow {
-  --sky-top: #eef4f9;
-  --sky-bottom: #b4d0ec;
+  --sky-top: #f3f3f1;
+  --sky-bottom: #8fcbef;
+  --chip-on-sky: rgba(17, 17, 17, 0.07);
   --hill-back: #8fc06d;
   --hill-front: #5f9e46;
   --hill-deep: #2f6424;
   --on-sky: #111111;
-  --on-sky-mute: #3d4a58;
+  --on-sky-mute: #555b62;
   --wordmark: #ffffff;
   --cloud-alpha: 0.85;
   --meadow-fade: 1.4s;
@@ -167,12 +173,12 @@
   background: linear-gradient(
     to bottom,
     var(--sky-top) 0%,
-    var(--sky-top) 18%,
+    var(--sky-top) 38%,
     var(--sky-bottom) 100%
   );
   transition-property:
-    --sky-top, --sky-bottom, --hill-back, --hill-front, --hill-deep, --on-sky, --on-sky-mute,
-    --wordmark, --cloud-alpha;
+    --sky-top, --sky-bottom, --chip-on-sky, --hill-back, --hill-front, --hill-deep, --on-sky,
+    --on-sky-mute, --wordmark, --cloud-alpha;
   transition-duration: var(--meadow-fade);
   transition-timing-function: var(--ease-out);
 }
@@ -183,6 +189,7 @@
   --hill-front: #14271b;
   --hill-deep: #0b170f;
   --on-sky: #f2f4fa;
+  --chip-on-sky: rgba(255, 255, 255, 0.1);
   --on-sky-mute: #a7b2c7;
   --wordmark: #e9ecf7;
   --cloud-alpha: 0.12;
@@ -191,10 +198,16 @@
 .meadow .text-mute {
   color: var(--on-sky-mute);
 }
-.meadow-bar {
-  background: var(--hill-deep);
-  color: #ffffff;
+/* The huge name rises from behind the hills, overshooting a touch before it settles. */
+.meadow-word {
+  transform-box: fill-box;
+  transition: transform 1.8s var(--ease-spring);
 }
+.meadow[data-risen="false"] .meadow-word {
+  transform: translateY(78%);
+  transition-duration: 0s;
+}
+
 .meadow-day,
 .meadow-night {
   transition: opacity var(--meadow-fade) var(--ease-out);
@@ -261,6 +274,17 @@
   }
 }
 
+/* Works fan caption: the new project name fades in as the deck reorders. */
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+.caption-fade {
+  animation: caption-in 220ms var(--ease-out) both;
+}
+
 /* Intro: chunks of the sentence settle in from a soft blur. */
 .reveal {
   animation: word-in var(--dur-slow) var(--ease-out) both;
@@ -299,9 +323,15 @@
   .meadow {
     --meadow-fade: 0s;
   }
+  .meadow-word {
+    transition: none;
+  }
   .meadow-cloud,
   .meadow-firefly,
   .meadow[data-night="true"] .meadow-stars {
+    animation: none;
+  }
+  .caption-fade {
     animation: none;
   }
   .reveal,

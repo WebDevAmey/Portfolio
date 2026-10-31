@@ -97,7 +97,7 @@ export function MeadowScene() {
           <stop offset="1" style={{ stopColor: "var(--hill-deep)" }} />
         </linearGradient>
         <clipPath id="meadow-word">
-          <rect width="1440" height="452" />
+          <rect width="1440" height="450" />
         </clipPath>
         <mask id="meadow-crescent">
           <rect width="1440" height="560" fill="#fff" />
@@ -138,23 +138,25 @@ export function MeadowScene() {
         style={{ fill: "var(--hill-back)" }}
       />
 
-      {/* The wordmark, tucked behind the near hill. */}
-      <text
-        x="720"
-        y="436"
-        textAnchor="middle"
-        clipPath="url(#meadow-word)"
-
-        fontSize="372"
-        fontWeight="600"
-        letterSpacing="-22"
-        style={{
-          fill: "var(--wordmark)",
-          fontFamily: "var(--ff-text), ui-sans-serif, system-ui, sans-serif",
-        }}
-      >
-        amey
-      </text>
+      {/* The wordmark, tucked behind the near hill. It rises into place when the footer
+          scrolls into view; the clip stays put so the letters emerge from the ground. */}
+      <g clipPath="url(#meadow-word)">
+        <text
+          className="meadow-word"
+          x="720"
+          y="446"
+          textAnchor="middle"
+          fontSize="450"
+          fontWeight="600"
+          letterSpacing="-26"
+          style={{
+            fill: "var(--wordmark)",
+            fontFamily: "var(--ff-text), ui-sans-serif, system-ui, sans-serif",
+          }}
+        >
+          amey
+        </text>
+      </g>
 
       {/* Near hill. */}
       <path
@@ -163,6 +165,12 @@ export function MeadowScene() {
           return `L${x} ${hillY(x).toFixed(1)}`;
         }).join(" ")} L1440 560 L0 560Z`}
         fill="url(#meadow-near)"
+      />
+
+      {/* A darker swell in the foreground for depth. */}
+      <path
+        d="M0 470 C 180 430 420 440 640 492 S 980 560 1100 560 H0Z"
+        style={{ fill: "var(--hill-deep)", opacity: 0.55 }}
       />
 
       {/* Wildflowers; they glow after dark. */}

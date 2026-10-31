@@ -1,3 +1,4 @@
+import { DailyQuote } from "@/components/daily-quote";
 import { about, facts } from "@/data/site";
 
 export function About() {
@@ -20,6 +21,9 @@ export function About() {
           </div>
         ))}
       </dl>
+      <div className="mt-14 rounded-[var(--radius-card)] border border-line bg-surface p-6 sm:p-8">
+        <DailyQuote />
+      </div>
     </section>
   );
 }
