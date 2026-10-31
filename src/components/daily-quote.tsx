@@ -58,7 +58,7 @@ export function DailyQuote() {
   return (
     <figure className="flex flex-col gap-5" aria-labelledby="quote-label">
       <p id="quote-label" className="mono-label flex items-center gap-3">
-        <span className="size-1.5 rounded-full bg-fg" aria-hidden="true" />
+        <span className="size-1.5 rounded-full bg-current" aria-hidden="true" />
         Line of the day
         <span className="tabular-nums" aria-hidden={!today}>
           {today ? `${String(today.day).padStart(3, "0")} / ${today.daysInYear}` : " "}

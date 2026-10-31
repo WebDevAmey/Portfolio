@@ -10,6 +10,12 @@
   --color-mute: var(--mute);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-hl-yellow: var(--hl-yellow);
+  --color-hl-violet: var(--hl-violet);
+  --color-hl-green: var(--hl-green);
+  --color-hl-blue: var(--hl-blue);
+  --color-hl-pink: var(--hl-pink);
+  --color-hl-peach: var(--hl-peach);
   --font-sans: var(--ff-text), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--ff-mono), ui-monospace, monospace;
   --ease-out: var(--ease-out);
@@ -99,26 +105,165 @@
   }
 }
 
-/* The pond's edges dissolve into the page instead of ending at a hard border. */
-.pond {
-  -webkit-mask-image:
-    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
-    linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
-    linear-gradient(to bottom, transparent, #000 9%, #000 91%, transparent);
-  mask-composite: intersect;
+/* Footer meadow. Registered colours so day and night crossfade instead of snapping. */
+@property --sky-top {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #eef4f9;
+}
+@property --sky-bottom {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #b4d0ec;
+}
+@property --hill-back {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #8fc06d;
+}
+@property --hill-front {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #5f9e46;
+}
+@property --hill-deep {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2f6424;
+}
+@property --on-sky {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #111111;
+}
+@property --on-sky-mute {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #3d4a58;
+}
+@property --wordmark {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --cloud-alpha {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.85;
 }
 
-/* Works ring label: letters roll up into place one after another. */
-@keyframes letter-roll {
-  from {
-    transform: translateY(105%);
+.meadow {
+  --sky-top: #eef4f9;
+  --sky-bottom: #b4d0ec;
+  --hill-back: #8fc06d;
+  --hill-front: #5f9e46;
+  --hill-deep: #2f6424;
+  --on-sky: #111111;
+  --on-sky-mute: #3d4a58;
+  --wordmark: #ffffff;
+  --cloud-alpha: 0.85;
+  --meadow-fade: 1.4s;
+  color: var(--on-sky);
+  background: linear-gradient(
+    to bottom,
+    var(--sky-top) 0%,
+    var(--sky-top) 18%,
+    var(--sky-bottom) 100%
+  );
+  transition-property:
+    --sky-top, --sky-bottom, --hill-back, --hill-front, --hill-deep, --on-sky, --on-sky-mute,
+    --wordmark, --cloud-alpha;
+  transition-duration: var(--meadow-fade);
+  transition-timing-function: var(--ease-out);
+}
+.meadow[data-night="true"] {
+  --sky-top: #060a15;
+  --sky-bottom: #1b2744;
+  --hill-back: #1c3326;
+  --hill-front: #14271b;
+  --hill-deep: #0b170f;
+  --on-sky: #f2f4fa;
+  --on-sky-mute: #a7b2c7;
+  --wordmark: #e9ecf7;
+  --cloud-alpha: 0.12;
+}
+.meadow .mono-label,
+.meadow .text-mute {
+  color: var(--on-sky-mute);
+}
+.meadow-bar {
+  background: var(--hill-deep);
+  color: #ffffff;
+}
+.meadow-day,
+.meadow-night {
+  transition: opacity var(--meadow-fade) var(--ease-out);
+}
+.meadow-night {
+  opacity: 0;
+}
+.meadow[data-night="true"] .meadow-night {
+  opacity: 1;
+}
+.meadow[data-night="true"] .meadow-day {
+  opacity: 0;
+}
+.meadow-stars {
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 27% 42%, #fff 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 41% 12%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 30%, #fff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 68% 8%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 79% 36%, #fff 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 90% 20%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 6% 48%, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 35% 26%, #fff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 62% 46%, #fff 50%, transparent 51%);
+  background-size: 640px 420px;
+}
+.meadow[data-night="true"] .meadow-stars {
+  animation: twinkle 5s ease-in-out infinite alternate;
+}
+@keyframes twinkle {
+  to {
+    opacity: 0.55;
   }
 }
-.roll-letter {
-  animation: letter-roll var(--dur-slow) var(--ease-out) both;
+.meadow-cloud {
+  animation: cloud-drift 38s ease-in-out infinite alternate;
+}
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-40px);
+  }
+  to {
+    transform: translateX(60px);
+  }
+}
+.meadow-firefly {
+  transform-box: fill-box;
+  animation: firefly 9s ease-in-out infinite;
+}
+@keyframes firefly {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.2;
+  }
+  30% {
+    transform: translate(18px, -14px);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(-10px, -26px);
+    opacity: 0.5;
+  }
+}
+
+/* Intro: chunks of the sentence settle in from a soft blur. */
+.reveal {
+  animation: word-in var(--dur-slow) var(--ease-out) both;
 }
 
 /* Daily quote: words settle in from a soft blur. */
@@ -151,9 +296,15 @@
   html {
     scroll-behavior: auto;
   }
-  .roll-letter {
+  .meadow {
+    --meadow-fade: 0s;
+  }
+  .meadow-cloud,
+  .meadow-firefly,
+  .meadow[data-night="true"] .meadow-stars {
     animation: none;
   }
+  .reveal,
   .quote-word {
     animation: word-in-fade var(--dur-base) linear both;
   }
