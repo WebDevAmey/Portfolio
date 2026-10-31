@@ -31,7 +31,7 @@ npm run dev        # http://localhost:3000
 src/
   app/            layout, home page, case studies, sitemap, robots, OG image, fonts
   sections/       hero, works, about, contact
-  components/     header, meadow footer, shaped works grid, CTA, daily quote, local time, icons
+  components/     header, meadow footer, works card fan, CTA, daily quote, local time, icons
   data/           site.ts (bio, links, hero words), projects.ts, quotes.json
   lib/            quote logic, motion tokens for JS, shard burst, helpers
   styles/         tokens.css (colors, type scale, spacing, radii, durations, easings)
@@ -43,7 +43,7 @@ Design tokens live in `src/styles/tokens.css`. JS animations read the same durat
 
 1. Add an entry to `projects` in `src/data/projects.ts`. The type explains each field.
 2. Optional screenshot: put a 16:10 `.webp` (about 1440x900) in `public/project-image/` and set `image: shot("file-name", "alt text")`. Without one, the card gets generated monochrome cover art.
-3. Set `featured: true` to show it on the home page (keep it to about six; each card takes the next shape in `src/components/works-shapes.tsx`). Every project gets a case-study page either way.
+3. Set `featured: true` to show it on the home page (keep it to about six; they make up the card fan in `src/components/works-fan.tsx`). Every project gets a case-study page either way.
 
 A case study page is generated at `/projects/<slug>` automatically.
 
@@ -66,7 +66,7 @@ Bricolage Grotesque and JetBrains Mono (both SIL OFL 1.1) are self-hosted from `
 
 ## The footer meadow
 
-`src/components/meadow-scene.tsx` draws the scene as one SVG; `src/components/site-footer.tsx` picks day or night from the visitor's clock and holds the toggle. Day and night colours are CSS custom properties on `.meadow` in `src/app/globals.css`, registered with `@property` so they crossfade.
+`src/components/meadow-scene.tsx` draws the scene as one SVG; `src/components/site-footer.tsx` picks day or night from the visitor's clock, holds the toggle, and raises the name when the footer scrolls into view. Day and night colours are CSS custom properties on `.meadow` in `src/app/globals.css`, registered with `@property` so they crossfade.
 
 ## Deploy
 

@@ -2,6 +2,11 @@
 
 Owner: Amey Tarmale · Branch: `revamp/v2` · Live: https://www.ameytarmale.site
 
+> **Revision 4 (card fan, footer after Amey's reference).** Supersedes the works and footer notes in revision 3.
+>
+> - **Works card fan.** The six featured projects sit in a fanned hand of white-framed cards (`components/works-fan.tsx`): the front card in the middle, the rest alternating left and right with growing tilt (6° per step), a slight drop and scale so the hand reads as an arc, and deeper shadows toward the front. Clicking a side card rotates the deck so it comes to the front (380ms ease-out); the front card links to its case study. Arrow buttons and the Left/Right keys shuffle too, and focus moves to the new front card. A caption below crossfades (220ms) to the project name, type and summary, with a 01/06 counter. Reduced motion keeps the same layout and swaps instantly.
+> - **Footer.** Light top band with a brand block (mark, name, one line, icon links for GitHub, X, LinkedIn and email) on the left and Navigate / Work / Elsewhere columns on the right, then a copyright row with Pune time, the Night sky toggle and back to top. The band fades into a blue sky over the meadow, where the huge white "amey" rises from behind the hills with a spring when the footer scrolls into view (1.8s); the clip stays fixed so the letters emerge from the ground. Without JS the name is already in place; with reduced motion it appears without moving. The line of the day moved into the About section.
+
 > **Revision 3 (story intro, shaped works, meadow footer).** Amey asked to drop the koi pond and the morphing "I build…" sentence, show his info as a story paragraph, centre things more, show fewer projects in new shapes, and turn the footer into a meadow. This supersedes the pond, hero and footer notes in revision 2.
 >
 > - **Intro.** Centred status badge, then one narrative paragraph: inline badges with small black icon tiles (MIT-WPU, Pune, OVRT), pastel markers behind keywords that double as links (`--hl-*` tokens, all with `--fg` text above 15:1), muted asides, and a "Let's talk" marker to the contact card. Chunks fade in from a soft blur; reduced motion fades only.
@@ -59,10 +64,10 @@ Single page, anchored sections, plus generated case-study pages.
 /                     Home
   header              Home mark · Work · About · Contact · Resume (floating pill)
   #top     Intro      Status badge + story paragraph with badges and highlighted keywords
-  #work    Works      Six featured projects, each card a different shape
-  #about   About      4 sentences + fact list
+  #work    Works      Six featured projects in a fanned card deck
+  #about   About      4 sentences + fact list + line of the day
   #contact Contact    Statement + squishy "Get in touch" CTA + direct links
-  footer              Meadow scene: daily quote, link columns, wordmark behind hills, day/night
+  footer              Brand, socials, link columns; meadow with the name rising behind the hills
 /projects/[slug]      Case study (static, one per project), shares the thumbnail via View Transition
 ```
 
