@@ -53,7 +53,7 @@ export function GithubGraph() {
 
   useEffect(() => {
     const fetchContributions = async () => {
-      const cacheKey = "github_contributions";
+      const cacheKey = "github_contributions_v2";
       const cachedData = typeof window !== "undefined" ? localStorage.getItem(cacheKey) : null;
       
       if (cachedData) {
@@ -68,39 +68,11 @@ export function GithubGraph() {
         }
       }
 
-      const query = `
-        query {
-          user(login: "WebDevAmey") {
-            contributionsCollection {
-              contributionCalendar {
-                totalContributions
-                months {
-                  name
-                }
-                weeks {
-                  contributionDays {
-                    contributionCount
-                    date
-                  }
-                }
-              }
-            }
-          }
-        }
-      `;
-
       try {
-        const response = await fetch("/api/github", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ query }),
-        });
-
+        const response = await fetch("/api/github/contributions");
         const data = await response.json();
-        const calendar = data?.data?.user?.contributionsCollection?.contributionCalendar;
-        
+        const calendar = data?.weeks?.length ? data : null;
+
         if (calendar) {
           setWeeks(calendar.weeks);
           setMonths(calendar.months);
