@@ -194,9 +194,9 @@ export function ProjectsGrid() {
 
   return (
     <>
-      <WorksRing projects={projectsData.slice(0, 4)} minCards={8} className="hidden h-[420px] md:block" />
+      <WorksRing projects={projectsData.slice(0, 6)} minCards={12} className="hidden h-[420px] md:block" />
       <div className="md:hidden">
-        <ProjectList projects={projectsData.slice(0, 4)} setActiveVideo={setActiveVideo} />
+        <ProjectList projects={projectsData.slice(0, 6)} setActiveVideo={setActiveVideo} />
       </div>
 
       {/* MODAL */}
