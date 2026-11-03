@@ -308,7 +308,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
                   {post.readingTime}
                 </span>
               )}
-              <BlogLikeButton slug={post.slug} initialLikes={post.claps} />
+              <BlogLikeButton slug={post.slug} initialLikes={post.claps ?? 0} />
             </div>
           </header>
 
